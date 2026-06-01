@@ -19,7 +19,7 @@ const page = () => {
         <div className='topic pt-6'>
           <h1 className='text-shadow-lg text-5xl font-bold'>
             Where will
-            <br />
+            <br/>
             <span className='font-bold text-[#2D4B37]'>You go next?</span>
 
           </h1>

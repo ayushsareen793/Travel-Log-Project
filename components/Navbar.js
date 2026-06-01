@@ -42,11 +42,7 @@ const Navbar = () => {
                     {session ? (
                         // Wrap button + dropdown together so dropdown is relative to the button
                         <div className="relative" ref={dropdownRef}>
-                            <button
-                                onClick={() => setShowDropdown(!showDropdown)}
-                                className="inline-flex items-center justify-center text-black border border-gray-300 hover:bg-gray-100 font-medium rounded text-sm px-4 py-2.5 focus:outline-none"
-                                type="button"
-                            >
+                            <button onClick={() => setShowDropdown(!showDropdown)} className="inline-flex items-center justify-center text-black   hover:underline font-medium rounded text-sm px-4 py-2.5 focus:outline-none" type="button">
                                 Welcome, {session.user.name ?? session.user.email}
                                 <svg className="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7" />
@@ -75,12 +71,10 @@ const Navbar = () => {
                                                 Explore Logs
                                             </Link>
                                         </li>
+                                        
                                         <li>
-                                            {/* Fix: actually call signOut */}
-                                            <button
-                                                onClick={() => { setShowDropdown(false); signOut() }}
-                                                className="inline-flex items-center w-full p-2 hover:bg-gray-100 rounded text-red-500"
-                                            >
+                                            {/*  signOut */}
+                                            <button onClick={() => { setShowDropdown(false); signOut() }} className="inline-flex items-center w-full p-2 hover:bg-gray-100 rounded text-red-500" >
                                                 Sign out
                                             </button>
                                         </li>
@@ -90,7 +84,7 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <Link href="/Login">
-                            <button className="text-l font-bold text-black hover:underline" type="button">
+                            <button className="  text-l font-bold  text-black hover:underline" type="button">
                                 Login
                             </button>
                         </Link>

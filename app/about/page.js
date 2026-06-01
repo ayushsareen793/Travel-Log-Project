@@ -1,10 +1,15 @@
 "use client"
 import react from "react"
 import Link from "next/link"
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 
 
 const page = () => {
+    const { data: session } = useSession()
+    const router = useRouter()
+
     return (
         <div className="bg-[#f7f5f0] min-h-screen pb-16 w-full">
 
@@ -155,57 +160,109 @@ const page = () => {
                     <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#2D4B37] mb-6">From the community</p>
 
                     {/* Featured logs again */}
-                    <div className="bg-white border border-[#e8e4da] rounded-2xl overflow-hidden mb-3">
-                        <div className="h-40 bg-linear-to-br from-[#2d5a3d] to-[#7ab87d] flex items-end p-4">
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/30 text-white"> Japan</span>
-                        </div>
-                        <div className="p-5">
-                            <h3 className="text-lg font-bold text-[#1c1c19] mb-2">Quiet Temples of Kyoto</h3>
-                            <p className="text-xs text-secondary leading-relaxed mb-3">
-                                Beyond the crowds of Fushimi Inari lies a network of mossy stone paths few tourists ever find, where foxes watch and incense drifts through the cedar trees.
-                            </p>
-                            <div className="flex items-center justify-between">
-                                <span className="text-xs font-medium text-[#2D4B37]">by Priya S.</span>
-                                <span className="text-xs text-secondary">Mountains · 5 min read</span>
+                    <div className="pt-3">
+                        <div className="bg-white block border border-[#e8e4da] rounded-2xl shadow-xs hover:shadow-md transition-shadow duration-200 overflow-hidden">
+
+                            {/* Image */}
+                            <div className="h-48 w-full relative">
+                                <img src="https://plus.unsplash.com/premium_photo-1697729628826-ca05ca7f5e8e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kalpa landscape" className="w-full h-full object-cover object-center" />
+                                <span className="absolute bottom-3 left-3 text-xs font-medium px-2 py-0.5 rounded-full bg-black/30 text-white backdrop-blur-sm">
+                                    Kalpa, India
+                                </span>
                             </div>
+
+                            {/* Body */}
+                            <div className="p-4">
+                                <a href="#">
+                                    <h5 className="mt-2 mb-1 text-sm font-bold tracking-tight text-heading leading-snug">
+                                        Kinner Kailash at Sunrise
+                                    </h5>
+                                </a>
+                                <p className="text-xs text-secondary leading-relaxed line-clamp-2">
+                                    A forgotten village in Kinnaur where apple blossoms frame the Kinner Kailash peak turning gold and pink as the first light hits the snow.
+                                </p>
+                                <div className="flex items-center justify-between mt-3">
+                                    <span className="text-xs font-medium text-[#2D4B37]">-by Priya S.</span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
+
                     {/* Small logs */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-3 pt-3">
 
-                        <div className="bg-white border border-[#e8e4da] rounded-2xl overflow-hidden">
-                            <div className="h-24 bg-linear-to-br from-[#2c4a6e] to-[#6a9fc4]" />
-                            <div className="p-3">
-                                <p className="text-xs font-bold text-[#1c1c19] leading-snug mb-1">Patagonia: End of the World</p>
-                                <p className="text-[10px] text-secondary">by Leila A. · Argentina</p>
+
+
+                        {/* card 1 */}
+                        <div className="bg-white block border border-[#e8e4da] rounded-2xl shadow-xs hover:shadow-md transition-shadow duration-200 overflow-hidden">
+
+
+                            <div className="h-36 w-full relative">
+                                <img
+                                    src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&auto=format&fit=crop"
+                                    alt="Landour landscape"
+                                    className="w-full h-full object-cover object-center"
+                                />
+                                <span className="absolute bottom-2 left-2 text-xs font-medium px-2 py-0.5 rounded-full bg-black/30 text-white backdrop-blur-sm">
+                                    Landour, India
+                                </span>
                             </div>
+
+
+                            <div className="p-4">
+                                <a href="#">
+                                    <h5 className="mt-2 mb-1 text-sm font-bold tracking-tight text-heading leading-snug">
+                                        The Quiet Hills of Landour
+                                    </h5>
+                                </a>
+                                <p className="text-xs text-secondary leading-relaxed line-clamp-2">
+                                    Tucked above Mussoorie, Landour is where Ruskin Bond still lives, cobbled lanes, old bakeries, and pine forests that smell like another century.
+                                </p>
+                                <div className="flex items-center justify-between mt-3">
+                                    <span className="text-xs font-medium text-[#2D4B37]">by Arjun M.</span>
+
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div className="bg-white border border-[#e8e4da] rounded-2xl overflow-hidden">
-                            <div className="h-24 bg-linear-to-br from-[#7c3d0a] to-[#f4c87a]" />
-                            <div className="p-3">
-                                <p className="text-xs font-bold text-[#1c1c19] leading-snug mb-1">Lisbon on a Shoestring</p>
-                                <p className="text-[10px] text-secondary">by Marco T. · Portugal</p>
+
+                        {/* card 2 */}
+                        <div className="bg-white block border border-[#e8e4da] rounded-2xl shadow-xs hover:shadow-md transition-shadow duration-200 overflow-hidden">
+                            <div className="h-36 w-full relative">
+                                <img
+                                    src="https://images.unsplash.com/photo-1614591276564-7b3e69347a48?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGthc2htaXJ8ZW58MHx8MHx8fDA%3D"
+                                    alt="Kashmir landscape"
+                                    className="w-full h-full object-cover object-center"
+                                />
+                                <span className="absolute bottom-2 left-2 text-xs font-medium px-2 py-0.5 rounded-full bg-black/30 text-white backdrop-blur-sm">
+                                    Kashmir, India
+                                </span>
+                            </div>
+                            <div className="p-4">
+                                <a href="#">
+                                    <h5 className="mt-2 mb-1 text-sm font-bold tracking-tight text-heading leading-snug">
+                                        Dal Lake at Dawn
+                                    </h5>
+                                </a>
+                                <p className="text-xs text-secondary leading-relaxed line-clamp-2">
+                                    Waking up on a houseboat as mist lifts off Dal Lake, shikaras gliding past, the Himalayas appearing slowly through the fog.
+                                </p>
+                                <div className="flex items-center justify-between mt-3">
+                                    <span className="text-xs font-medium text-[#2D4B37]">by Zara K.</span>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
 
 
 
-
-
                 {/* divider */}
                 <div className="h-px bg-[#e8e4da]" />
-
-
-
-
-
-
 
 
 
@@ -245,9 +302,6 @@ const page = () => {
 
 
 
-
-
-
                 {/*last section */}
                 <div className="bg-[#2D4B37] rounded-[18px] p-12 text-center">
                     <h2 className="text-3xl font-bold text-white mb-3">
@@ -258,16 +312,16 @@ const page = () => {
                         Just you, your journey, and a place to write it down.
                     </p>
                     <div className="flex items-center justify-center gap-3">
-                        <Link
-                            href="/new-log"
-                            className="inline-block bg-white text-[#2D4B37] text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors"
-                        >
-                            Create a free log →
-                        </Link>
-                        <Link
-                            href="/logs"
-                            className="inline-block text-white/70 text-sm px-6 py-2.5 rounded-full border border-white/20 hover:border-white/40 transition-colors"
-                        >
+                        <button onClick={() => {
+                            if (!session) {
+                                router.push("/Login")
+                                return
+                            }
+                            router.push("/newlog")
+                        }}  className="inline-block bg-white text-[#2D4B37] text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors">
+                            Create a free log
+                        </button>
+                        <Link href="/logs" className="inline-block text-white/70 text-sm px-6 py-2.5 rounded-full border border-white/20 hover:border-white/40 transition-colors" >
                             Explore logs
                         </Link>
                     </div>
