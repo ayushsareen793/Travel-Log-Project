@@ -66,7 +66,7 @@ const Navbar = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/explore" onClick={() => setShowDropdown(false)}
+                                            <Link href="/explorelogs" onClick={() => setShowDropdown(false)}
                                                 className="inline-flex items-center w-full p-2 hover:bg-gray-100 rounded">
                                                 Explore Logs
                                             </Link>

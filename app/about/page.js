@@ -15,7 +15,7 @@ const page = () => {
 
             {/* heading */}
             <div className="bg-[#2D4B37] px-6 py-16">
-                <div className="max-w-2xl mx-auto">
+                <div className="max-w-full mx-auto">
                     <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">
                         About Our Story
                     </p>
