@@ -19,7 +19,7 @@ const page = () => {
         <div className='topic pt-6'>
           <h1 className='text-shadow-lg text-5xl font-bold'>
             Where will
-            <br/>
+            <br />
             <span className='font-bold text-[#2D4B37]'>You go next?</span>
 
           </h1>
@@ -155,11 +155,7 @@ const page = () => {
 
 
               <div className="h-36 w-full relative">
-                <img
-                  src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&auto=format&fit=crop"
-                  alt="Landour landscape"
-                  className="w-full h-full object-cover object-center"
-                />
+                <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&auto=format&fit=crop" alt="Landour landscape" className="w-full h-full object-cover object-center" />
                 <span className="absolute bottom-2 left-2 text-xs font-medium px-2 py-0.5 rounded-full bg-black/30 text-white backdrop-blur-sm">
                   Landour, India
                 </span>
@@ -192,11 +188,7 @@ const page = () => {
           <div className='w-1/2'>
             <div className="bg-white block border border-[#e8e4da] rounded-2xl shadow-xs hover:shadow-md transition-shadow duration-200 overflow-hidden">
               <div className="h-36 w-full relative">
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1697730484307-a05ad3449015?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZGFyamVlbGluZ3xlbnwwfHwwfHx8MA%3D%3D"
-                  alt="Darjeeling landscape"
-                  className="w-full h-full object-cover object-center"
-                />
+                <img src="https://plus.unsplash.com/premium_photo-1697730484307-a05ad3449015?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZGFyamVlbGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Darjeeling landscape" className="w-full h-full object-cover object-center" />
                 <span className="absolute bottom-2 left-2 text-xs font-medium px-2 py-0.5 rounded-full bg-black/30 text-white backdrop-blur-sm">
                   Darjeeling, India
                 </span>
@@ -228,10 +220,7 @@ const page = () => {
             <div className="bg-white block border border-[#e8e4da] rounded-2xl shadow-xs hover:shadow-md transition-shadow duration-200 overflow-hidden">
               <div className="h-36 w-full relative">
                 <img
-                  src="https://images.unsplash.com/photo-1614591276564-7b3e69347a48?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGthc2htaXJ8ZW58MHx8MHx8fDA%3D"
-                  alt="Kashmir landscape"
-                  className="w-full h-full object-cover object-center"
-                />
+                  src="https://images.unsplash.com/photo-1614591276564-7b3e69347a48?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGthc2htaXJ8ZW58MHx8MHx8fDA%3D" alt="Kashmir landscape" className="w-full h-full object-cover object-center" />
                 <span className="absolute bottom-2 left-2 text-xs font-medium px-2 py-0.5 rounded-full bg-black/30 text-white backdrop-blur-sm">
                   Kashmir, India
                 </span>
@@ -258,11 +247,7 @@ const page = () => {
           <div className='w-1/2'>
             <div className="bg-white block border border-[#e8e4da] rounded-2xl shadow-xs hover:shadow-md transition-shadow duration-200 overflow-hidden">
               <div className="h-36 w-full relative">
-                <img
-                  src="https://images.unsplash.com/photo-1516406742981-2b7d67ec4ae8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbmFsaXxlbnwwfHwwfHx8MA%3D%3D"
-                  alt="Manali landscape"
-                  className="w-full h-full object-cover object-center"
-                />
+                <img src="https://images.unsplash.com/photo-1516406742981-2b7d67ec4ae8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbmFsaXxlbnwwfHwwfHx8MA%3D%3D" alt="Manali landscape" className="w-full h-full object-cover object-center" />
                 <span className="absolute bottom-2 left-2 text-xs font-medium px-2 py-0.5 rounded-full bg-black/30 text-white backdrop-blur-sm">
                   Manali, India
                 </span>
@@ -331,44 +316,33 @@ const page = () => {
               Join thousands of travellers sharing honest stories, hidden gems and unforgettable moments all around the world.
             </p>
             <div className="flex items-center justify-center gap-3">
-              <a href="/new-log" className="inline-flex items-center text-[#2D4B37] bg-white box-border border border-transparent hover:bg-gray-200 focus:ring-4 focus:ring-white/20 shadow-xs font-semibold leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none transition-colors">
+              {/* <a href="/new-log" className="inline-flex items-center text-[#2D4B37] bg-white box-border border border-transparent hover:bg-gray-200 focus:ring-4 focus:ring-white/20 shadow-xs font-semibold leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none transition-colors">
                 Create your first log
+              </a> */}
+              <button onClick={() => {
+                if (!session) {
+                  Router.push("/Login")
+                  return
+                }
+                Router.push("/newlog")
+              }} className='inline-flex items-center text-[#2D4B37] bg-white box-border border border-transparent hover:bg-gray-200 focus:ring-4 focus:ring-white/20 shadow-xs font-semibold leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none transition-colors'>
+                Create Your First Log
+              </button>
 
-              </a>
-              <a href="/logs" className="inline-flex items-center text-white box-border border border-white/20 hover:border-white/40 hover:bg-white/5 focus:ring-4 focus:ring-white/10 shadow-xs font-medium leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none transition-colors">
-                Explore logs
-              </a>
+              <button onClick={() => {
+                if (!session) {
+                  Router.push("/Login")
+                  return
+                }
+                Router.push("/explorelogs")
+              }} className='inline-flex items-center text-white box-border border border-white/20 hover:border-white/40 hover:bg-white/5 focus:ring-4 focus:ring-white/10 shadow-xs font-medium leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none transition-colors'>
+                Explore Logs
+              </button>
+
+              
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

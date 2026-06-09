@@ -64,7 +64,7 @@ const page = () => {
           <div className="w-full mx-auto">
             <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">New Log Entry</p>
             <h1 className="text-5xl font-bold text-white leading-tight mb-4">Tell Us About<br /><span className="italic text-[#a8d5b5]">Your Journey.</span></h1>
-            <p className="text-sm text-white/55 leading-relaxed max-w-lg">Document your journey — where you went, what you found, and the hidden gems only you know about.</p>
+            <p className="text-sm text-white/55 leading-relaxed max-w-lg">Document your journey- where you went, what you found, and the hidden gems only you know about.</p>
           </div>
         </div>
 
