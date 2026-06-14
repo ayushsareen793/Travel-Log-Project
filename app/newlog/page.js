@@ -59,14 +59,28 @@ const page = () => {
     <>
       <div className='w-full min-h-screen'>
 
-        {/* heading */}
-        <div className="bg-[#2D4B37] px-6 py-16">
-          <div className="w-full mx-auto">
+
+
+        {/* heading section */}
+        <div className="relative bg-[#2D4B37] overflow-hidden" style={{ minHeight: '380px' }}>
+
+          
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+
+           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
+
+          
+          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
+
+          {/* Content */}
+          <div className="relative z-10 px-6 py-16">
             <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">New Log Entry</p>
-            <h1 className="text-5xl font-bold text-white leading-tight mb-4">Tell Us About<br /><span className="italic text-[#a8d5b5]">Your Journey.</span></h1>
-            <p className="text-sm text-white/55 leading-relaxed max-w-lg">Document your journey- where you went, what you found, and the hidden gems only you know about.</p>
+            <h1 className="text-5xl font-bold text-white leading-tight mb-4 max-w-lg">Tell Us About<br /><span className="italic text-[#a8d5b5]">Your Journey.</span></h1>
+            <p className="text-sm text-white/60 leading-relaxed max-w-sm">Document your journey- where you went, what you found, and the hidden gems only you know about</p>
           </div>
+
         </div>
+
 
         <div className='max-w-6xl mx-auto pt-10 pb-16'>
 
@@ -93,6 +107,10 @@ const page = () => {
             <input type="date" value={dateOfVisit} onChange={(e) => setDateOfVisit(e.target.value)} className="w-full bg-white px-4 py-2.5 border border-[#e8e4da] rounded-xl text-sm text-[#1c1c19] focus:outline-none focus:ring-4 focus:ring-[#2D4B37]/10 focus:border-[#2D4B37] transition-all duration-150" />
           </div>
 
+
+
+
+
           {/* category */}
           <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4 pt-5">Category</p>
           <div className="flex flex-wrap gap-3">
@@ -106,7 +124,13 @@ const page = () => {
             <button type="button" onClick={() => toggleCategory('Road Trip')} className={`inline-flex items-center text-sm font-medium px-4 py-1.5 rounded gap-2 border transition-all duration-150 ${isActive('Road Trip') ? 'bg-[#2D4B37] text-white border-[#2D4B37]' : 'bg-[#eef5f1] text-[#2D4B37] border-[#2D4B37]/20 hover:bg-[#2D4B37] hover:text-white'}`}><img src="https://img.icons8.com/color/48/road.png" className={`w-4 h-4 ${isActive('Road Trip') ? 'brightness-[10]' : ''}`} />Road Trip</button>
           </div>
 
+
+
           <div className='h-px bg-[#e8e4da] my-8'></div>
+
+
+
+
 
           {/* cover photo */}
           <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4">Cover Photo</p>
@@ -118,6 +142,8 @@ const page = () => {
           </div>
 
           <div className='h-px bg-[#e8e4da] my-8'></div>
+
+
 
           {/* your log */}
           <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4">Your Log</p>
@@ -136,6 +162,9 @@ const page = () => {
 
           <div className='h-px bg-[#e8e4da] my-8'></div>
 
+
+
+
           {/* hidden gems */}
           <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4">Hidden Gems</p>
           <label className="block text-sm font-medium text-gray-800 mb-1.5">Add The Underrated Spots Only You Know About.</label>
@@ -147,6 +176,9 @@ const page = () => {
           </div>
 
           <div className='h-px bg-[#e8e4da] my-8'></div>
+
+
+
 
           {/* tips */}
           <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4">Tips & Recommendations</p>
@@ -162,6 +194,8 @@ const page = () => {
             <label className="block text-sm font-medium text-[#1c1c19] mb-1.5">Things To Avoid</label>
             <textarea value={thingsToAvoid} onChange={(e) => setThingsToAvoid(e.target.value)} placeholder="e.g. Tourist Traps, What Not To Do.." rows={4} className="w-full bg-white px-4 py-3 border border-[#e8e4da] rounded-xl text-sm text-[#1c1c19] placeholder:text-gray-500 focus:outline-none focus:ring-4 focus:ring-[#2D4B37]/10 focus:border-[#2D4B37] transition-all duration-150 resize-none" />
           </div>
+
+          
 
           {/* publish */}
           <div className='pt-5 mx-auto flex justify-center'>
