@@ -22,10 +22,9 @@ const page = () => {
 
           {/* Content */}
           <div className="relative z-10 px-6 py-16">
-            <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">✦ Travel Log</p>
+            <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">Home</p>
             <h1 className="text-5xl font-bold text-white leading-tight mb-4">
-              Where will<br />
-              <span className="italic text-[#a8d5b5]">You go next?</span>
+              Where will<br/><span className="italic text-[#a8d5b5]">You go next?</span>
             </h1>
             <p className="text-sm text-white/60 leading-relaxed max-w-sm mb-8">Curated travel logs from adventurers exploring the world's most extraordinary places.</p>
             <div className="flex gap-3">

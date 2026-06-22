@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -24,6 +23,9 @@ const page = () => {
   const [thingsToAvoid, setThingsToAvoid] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  //for coverpic
+  const [pic, setpic] = useState(null)
 
 
   // Toggle category

@@ -148,6 +148,7 @@ const Page = () => {
           <>
             {/* big card */}
             <div className='pt-5 max-w-7xl mx-auto px-6'>
+              <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4 pt-5">Latest Log</p>
               <div className='bg-white border border-[#e8e4da] rounded-2xl p-4 mb-4'>
                 <p className='font-bold text-sm text-[#1c1c19]'>{filtered[0].title}</p>
                 <p className='text-xs text-gray-500 leading-relaxed line-clamp-2'>{filtered[0].about}</p>
@@ -167,6 +168,7 @@ const Page = () => {
             <div className="w-3/4 h-px bg-[#e8e4da] mx-auto" />
 
             {/* grid cards */}
+            <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37]  mb-4 pt-5 max-w-7xl text-start px-6 mx-auto">All Logs</p>
             <div className='pt-5 max-w-7xl mx-auto px-6 py-10 grid grid-cols-2 gap-4'>
               {filtered.slice(1).map((log) => (
                 <div className='bg-white border border-[#e8e4da] rounded-2xl p-4 mb-4' key={log._id}>
