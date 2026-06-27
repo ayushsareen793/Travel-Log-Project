@@ -13,8 +13,49 @@ const page = () => {
     return (
         <div className="bg-[#f7f5f0] min-h-screen pb-16 w-full">
 
-            {/* heading */}
-            <div className="bg-[#2D4B37] px-6 py-16">
+            {/* heading section */}
+            <div className="relative bg-[#2D4B37] overflow-hidden" style={{ minHeight: '380px' }}>
+
+
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
+
+
+                <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
+
+                {/* Content */}
+                <div className="relative z-10 px-6 py-16">
+                    <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">About Our Story</p>
+                    <h1 className="text-5xl font-bold text-white leading-tight mb-4">
+                        Built for travellers<br />
+                        who go{" "}
+                        <span className="italic text-[#a8d5b5]">off script.</span>
+                    </h1>
+                    <p className="text-sm text-white/60 leading-relaxed max-w-sm"> We didn't build TravelLog for the highlight reel. We built it for the missed trains, the hidden alleys, the meals that changed everything and the people brave enough to write it all down.</p>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {/* <div className="bg-[#2D4B37] px-6 py-16">
                 <div className="max-w-full mx-auto">
                     <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">
                         About Our Story
@@ -28,7 +69,7 @@ const page = () => {
                         We didn't build TravelLog for the highlight reel. We built it for the missed trains, the hidden alleys, the meals that changed everything and the people brave enough to write it all down.
                     </p>
                 </div>
-            </div>
+            </div> */}
 
 
 
@@ -318,7 +359,7 @@ const page = () => {
                                 return
                             }
                             router.push("/newlog")
-                        }}  className="inline-block bg-white text-[#2D4B37] text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors">
+                        }} className="inline-block bg-white text-[#2D4B37] text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors">
                             Create a free log
                         </button>
                         <Link href="/logs" className="inline-block text-white/70 text-sm px-6 py-2.5 rounded-full border border-white/20 hover:border-white/40 transition-colors" >

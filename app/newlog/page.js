@@ -2,10 +2,12 @@
 import React, { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useRef } from 'react'
 
 const page = () => {
   const { data: session } = useSession()
   const router = useRouter()
+  const fileinputref = useRef(null)
 
   // states for all fields
   const [title, setTitle] = useState('')
@@ -38,6 +40,23 @@ const page = () => {
 
 
 
+  //image upload using cloudinary
+  const uploadimage= async ()=>{
+    if (!pic) {
+      return null
+    }
+    const data=  new FormData();
+    data.append('file',pic);
+    data.append('upload_preset','travellog_uploads');
+    const res=await fetch("https://api.cloudinary.com/v1_1/dxey00jzp/image/upload",{method:"POST",body:data});
+    const d=await res.json()
+    return d.secure_url
+
+
+  }
+
+
+
 
   // submit handler
   const handleSubmit = async () => {
@@ -46,7 +65,8 @@ const page = () => {
     setLoading(true)
     setError('')
     try {
-      const data = { title, country, city, dateOfVisit, categories: selectedCategories, about, bestTimeToVisit, howToGetThere, hiddenGems: [gem1, gem2].filter((g) => g.trim() !== ''), whereToEat, whereToStay, thingsToAvoid }
+      const imageurl= await uploadimage()
+      const data = { title, country, city, dateOfVisit, categories: selectedCategories, about, bestTimeToVisit, howToGetThere, hiddenGems: [gem1, gem2].filter((g) => g.trim() !== ''), whereToEat, whereToStay, thingsToAvoid,coverPhoto:imageurl }
       const res = await fetch('/api/logs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       const result = await res.json()
       if (result.success) { router.push('/explorelogs') } else { setError(result.error || 'Something went wrong.') }
@@ -55,6 +75,8 @@ const page = () => {
     } finally {
       setLoading(false)
     }
+    
+
   }
 
   return (
@@ -66,12 +88,12 @@ const page = () => {
         {/* heading section */}
         <div className="relative bg-[#2D4B37] overflow-hidden" style={{ minHeight: '380px' }}>
 
-          
+
           <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
 
-           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
 
-          
+
           <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
 
           {/* Content */}
@@ -136,12 +158,30 @@ const page = () => {
 
           {/* cover photo */}
           <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4">Cover Photo</p>
-          <div className="border-2 border-dashed border-[#e8e4da] rounded-2xl p-10 text-center bg-white hover:border-[#2D4B37] hover:bg-[#f4f9f6] transition-all duration-150 cursor-pointer mb-8">
-            <img src="https://img.icons8.com/color/96/image.png" className="w-12 h-12 mx-auto mb-3" />
-            <p className="text-sm font-medium text-[#1c1c19] mb-1">Click to upload cover photo</p>
-            <p className="text-xs text-gray-400">PNG, JPG or WEBP · Max 5MB</p>
-            <input type="file" accept="image/*" className="hidden" />
-          </div>
+
+          <input ref={fileinputref} onChange={(e) => setpic(e.target.files[0])} type="file" accept="image/*" className="hidden" />
+
+          {/* if pic exists then show pic preview , if not then show the same upload text*/}
+
+          {pic ? (
+            <div onClick={() => fileinputref.current.click()} className="relative rounded-2xl overflow-hidden mb-8 cursor-pointer">
+              <img src={URL.createObjectURL(pic)} className="w-full h-64 object-cover" />
+              <div className="absolute bottom-3 right-3 bg-white/90 text-xs font-medium px-3 py-1.5 rounded-full text-[#2D4B37]">
+                Change photo
+              </div>
+            </div>
+          ) : (
+            <div onClick={() => fileinputref.current.click()} className="border-2 border-dashed border-[#e8e4da] rounded-2xl p-10 text-center bg-white hover:border-[#2D4B37] hover:bg-[#f4f9f6] transition-all duration-150 cursor-pointer mb-8">
+              <img src="https://img.icons8.com/color/96/image.png" className="w-12 h-12 mx-auto mb-3" />
+              <p className="text-sm font-medium text-[#1c1c19] mb-1">Click to upload cover photo</p>
+              <p className="text-xs text-gray-400">PNG, JPG or WEBP · Max 5MB</p>
+            </div>
+          )}
+
+
+
+
+
 
           <div className='h-px bg-[#e8e4da] my-8'></div>
 
@@ -197,7 +237,7 @@ const page = () => {
             <textarea value={thingsToAvoid} onChange={(e) => setThingsToAvoid(e.target.value)} placeholder="e.g. Tourist Traps, What Not To Do.." rows={4} className="w-full bg-white px-4 py-3 border border-[#e8e4da] rounded-xl text-sm text-[#1c1c19] placeholder:text-gray-500 focus:outline-none focus:ring-4 focus:ring-[#2D4B37]/10 focus:border-[#2D4B37] transition-all duration-150 resize-none" />
           </div>
 
-          
+
 
           {/* publish */}
           <div className='pt-5 mx-auto flex justify-center'>

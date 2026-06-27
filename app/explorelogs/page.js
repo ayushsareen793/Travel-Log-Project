@@ -43,12 +43,12 @@ const Page = () => {
         {/* heading section */}
         <div className="relative bg-[#2D4B37] overflow-hidden" style={{ minHeight: '380px' }}>
 
-          
+
           <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
 
-           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
 
-          
+
           <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
 
           {/* Content */}
@@ -149,15 +149,27 @@ const Page = () => {
             {/* big card */}
             <div className='pt-5 max-w-7xl mx-auto px-6'>
               <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4 pt-5">Latest Log</p>
-              <div className='bg-white border border-[#e8e4da] rounded-2xl p-4 mb-4'>
-                <p className='font-bold text-sm text-[#1c1c19]'>{filtered[0].title}</p>
-                <p className='text-xs text-gray-500 leading-relaxed line-clamp-2'>{filtered[0].about}</p>
-                <p className='text-xs text-gray-400'>{filtered[0].country}, {filtered[0].city}</p>
-                <div className='flex items-center gap-2'>
-                  <div className='w-6 h-6 rounded-full bg-[#2D4B37]/20 flex items-center justify-center text-xs font-bold text-[#2D4B37]'>
-                    {filtered[0].author.name[0]}
+              <div className='bg-white border border-[#e8e4da] rounded-2xl overflow-hidden mb-4'>
+
+                 {/* if coverPhoto isnt uploaded then show the icon */}
+                  {filtered[0].coverPhoto ? (
+                    <img className='w-full h-72 object-cover' src={filtered[0].coverPhoto} alt={filtered[0].title} />
+                  ) : (
+                    <div className='w-full h-32 bg-[#eef5f1] flex items-center justify-center'>
+                      <img src="https://img.icons8.com/color/48/image.png" className="w-8 h-8 opacity-40" />
+                    </div>
+                  )}
+
+                <div className='p-4'>
+                  <p className='font-bold text-sm text-[#1c1c19]'>{filtered[0].title}</p>
+                  <p className='text-xs text-gray-500 leading-relaxed line-clamp-2'>{filtered[0].about}</p>
+                  <p className='text-xs text-gray-400'>{filtered[0].country}, {filtered[0].city}</p>
+                  <div className='flex items-center gap-2'>
+                    <div className='w-6 h-6 rounded-full bg-[#2D4B37]/20 flex items-center justify-center text-xs font-bold text-[#2D4B37]'>
+                      {filtered[0].author.name[0]}
+                    </div>
+                    <p className='text-xs font-medium text-[#2D4B37]'>{filtered[0].author.name}</p>
                   </div>
-                  <p className='text-xs font-medium text-[#2D4B37]'>{filtered[0].author.name}</p>
                 </div>
               </div>
             </div>
@@ -171,15 +183,28 @@ const Page = () => {
             <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37]  mb-4 pt-5 max-w-7xl text-start px-6 mx-auto">All Logs</p>
             <div className='pt-5 max-w-7xl mx-auto px-6 py-10 grid grid-cols-2 gap-4'>
               {filtered.slice(1).map((log) => (
-                <div className='bg-white border border-[#e8e4da] rounded-2xl p-4 mb-4' key={log._id}>
-                  <p className='font-bold text-sm text-[#1c1c19]'>{log.title}</p>
-                  <p className='text-xs text-gray-500 leading-relaxed line-clamp-2'>{log.about}</p>
-                  <p className='text-xs text-gray-400'>{log.country},{log.city}</p>
-                  <div className='flex items-center gap-2'>
-                    <div className='w-6 h-6 rounded-full bg-[#2D4B37]/20 flex items-center justify-center text-xs font-bold text-[#2D4B37]'>
-                      {log.author.name[0]}
+                <div className='bg-white border border-[#e8e4da] rounded-2xl overflow-hidden mb-4' key={log._id}>
+                  {/* if coverPhoto isnt uploaded then show the icon */}
+                  {log.coverPhoto ? (
+                    <img className='w-full h-42 object-cover' src={log.coverPhoto} alt={log.title} />
+                  ) : (
+                    <div className='w-full h-32 bg-[#eef5f1] flex items-center justify-center'>
+                      <img src="https://img.icons8.com/color/48/image.png" className="w-8 h-8 opacity-40" />
                     </div>
-                    <p className='text-xs font-medium text-[#2D4B37]'>{log.author.name}</p>
+                  )}
+
+                  <div className='p-4'>
+
+
+                    <p className='font-bold text-sm text-[#1c1c19]'>{log.title}</p>
+                    <p className='text-xs text-gray-500 leading-relaxed line-clamp-2'>{log.about}</p>
+                    <p className='text-xs text-gray-400'>{log.country},{log.city}</p>
+                    <div className='flex items-center gap-2'>
+                      <div className='w-6 h-6 rounded-full bg-[#2D4B37]/20 flex items-center justify-center text-xs font-bold text-[#2D4B37]'>
+                        {log.author.name[0]}
+                      </div>
+                      <p className='text-xs font-medium text-[#2D4B37]'>{log.author.name}</p>
+                    </div>
                   </div>
                 </div>
               ))}
