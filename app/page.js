@@ -12,19 +12,17 @@ const page = () => {
   return (
     <>
       <div className='max-w-full'>
-        {/* Hero heading section  */}
-        <div className="relative bg-[#2D4B37] overflow-hidden" style={{ minHeight: '420px' }}>
+        {/* heading section  */}
+        <div className="relative bg-[#2D4B37] overflow-hidden min-h-105">
           <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
-
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
-
-          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
+          <div className="absolute inset-0 bg-linear-to-r from-[#142819]/95 via-[#142819]/50 to-transparent" />
+          <div className="absolute inset-0 bg-black/25" />
 
           {/* Content */}
           <div className="relative z-10 px-6 py-16">
             <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">Home</p>
             <h1 className="text-5xl font-bold text-white leading-tight mb-4">
-              Where will<br/><span className="italic text-[#a8d5b5]">You go next?</span>
+              Where will<br /><span className="italic text-[#a8d5b5]">You go next?</span>
             </h1>
             <p className="text-sm text-white/60 leading-relaxed max-w-sm mb-8">Curated travel logs from adventurers exploring the world's most extraordinary places.</p>
             <div className="flex gap-3">
@@ -192,14 +190,30 @@ const page = () => {
 
         {/* last section */}
         <div className="w-full mx-auto px-8 py-16">
-          <div className="bg-[#2D4B37] rounded-[18px] p-12 text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[2px] text-[#a8d5b5] mb-3">Start Today</p>
-            <h2 className="text-[30px] font-extrabold tracking-tight text-white mb-4">Ready To Document Your <span className="text-[#a8d5b5]">next adventure?</span></h2>
-            <p className="text-sm text-white/60 leading-relaxed max-w-sm mx-auto mb-8">Join thousands of travellers sharing honest stories, hidden gems and unforgettable moments all around the world.</p>
-            <div className="flex items-center justify-center gap-3">
-              <button onClick={() => { if (!session) { Router.push("/Login"); return } Router.push("/newlog") }} className="inline-flex items-center text-[#2D4B37] bg-white box-border border border-transparent hover:bg-gray-200 focus:ring-4 focus:ring-white/20 shadow-xs font-semibold leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none transition-colors">Create Your First Log</button>
-              <button onClick={() => { if (!session) { Router.push("/Login"); return } Router.push("/explorelogs") }} className="inline-flex items-center text-white box-border border border-white/20 hover:border-white/40 hover:bg-white/5 focus:ring-4 focus:ring-white/10 shadow-xs font-medium leading-5 rounded-full text-sm px-6 py-2.5 focus:outline-none transition-colors">Explore Logs</button>
+          <div className="rounded-[18px] overflow-hidden relative min-h-80">
+            <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&auto=format&fit=crop&q=70" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 bg-linear-to-r from-[#0c1c10] via-[#0c1c10]/80 to-transparent" />
+
+            <div className="relative z-10 flex flex-col justify-center h-full px-12 py-16 max-w-lg">
+              <p className="text-[11px] font-bold uppercase tracking-[2px] text-[#a8d5b5] mb-4">Start Today</p>
+              <h2 className="text-[30px] font-extrabold tracking-tight text-white leading-tight mb-4">
+                Ready To Document Your <span className="text-[#a8d5b5]">next adventure?</span>
+              </h2>
+              <p className="text-sm text-white/55 leading-relaxed mb-9 max-w-xs">
+                Join thousands of travellers sharing honest stories, hidden gems and unforgettable moments all around the world.
+              </p>
+
+              {/* buttons */}
+              <div className="flex flex-col gap-3 items-start">
+                <button onClick={() => { if (!session) { Router.push("/Login"); return } Router.push("/newlog") }} className="inline-flex items-center gap-2 bg-white text-[#2D4B37] font-bold text-sm px-7 py-3 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-md">
+                  Create Your First Log
+                </button>
+                <button onClick={() => { if (!session) { Router.push("/Login"); return } Router.push("/explorelogs") }} className="text-white/60 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white/70 transition-all duration-150">
+                  Or browse existing logs-
+                </button>
+              </div>
             </div>
+
           </div>
         </div>
 

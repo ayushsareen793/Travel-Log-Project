@@ -13,16 +13,10 @@ const page = () => {
     return (
         <div className="bg-[#f7f5f0] min-h-screen pb-16 w-full">
 
-            {/* heading section */}
-            <div className="relative bg-[#2D4B37] overflow-hidden" style={{ minHeight: '380px' }}>
-
-
+            <div className="relative bg-[#2D4B37] overflow-hidden min-h-100">
                 <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
-
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
-
-
-                <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
+                <div className="absolute inset-0 bg-linear-to-r from-[#142819]/95 via-[#142819]/50 to-transparent" />
+                <div className="absolute inset-0 bg-black/25" />
 
                 {/* Content */}
                 <div className="relative z-10 px-6 py-16">
@@ -32,47 +26,10 @@ const page = () => {
                         who go{" "}
                         <span className="italic text-[#a8d5b5]">off script.</span>
                     </h1>
-                    <p className="text-sm text-white/60 leading-relaxed max-w-sm"> We didn't build TravelLog for the highlight reel. We built it for the missed trains, the hidden alleys, the meals that changed everything and the people brave enough to write it all down.</p>
+                    <p className="text-sm text-white/60 leading-relaxed max-w-sm mb-8">We didn't build TravelLog for the highlight reel. We built it for the missed trains, the hidden alleys, the meals that changed everything and the people brave enough to write it all down.</p>
                 </div>
 
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            {/* <div className="bg-[#2D4B37] px-6 py-16">
-                <div className="max-w-full mx-auto">
-                    <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-5">
-                        About Our Story
-                    </p>
-                    <h1 className="text-5xl font-bold text-white leading-tight mb-4">
-                        Built for travellers<br />
-                        who go{" "}
-                        <span className="italic text-[#a8d5b5]">off script.</span>
-                    </h1>
-                    <p className="text-sm text-white/55 leading-relaxed max-w-lg">
-                        We didn't build TravelLog for the highlight reel. We built it for the missed trains, the hidden alleys, the meals that changed everything and the people brave enough to write it all down.
-                    </p>
-                </div>
-            </div> */}
-
-
-
 
 
 
@@ -344,28 +301,30 @@ const page = () => {
 
 
                 {/*last section */}
-                <div className="bg-[#2D4B37] rounded-[18px] p-12 text-center">
-                    <h2 className="text-3xl font-bold text-white mb-3">
-                        Start your first log today.
-                    </h2>
-                    <p className="text-sm text-white/55 leading-relaxed mb-6 max-w-sm mx-auto">
-                        No followers needed. No algorithm to please.<br />
-                        Just you, your journey, and a place to write it down.
-                    </p>
-                    <div className="flex items-center justify-center gap-3">
-                        <button onClick={() => {
-                            if (!session) {
-                                router.push("/Login")
-                                return
-                            }
-                            router.push("/newlog")
-                        }} className="inline-block bg-white text-[#2D4B37] text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors">
-                            Create a free log
-                        </button>
-                        <Link href="/logs" className="inline-block text-white/70 text-sm px-6 py-2.5 rounded-full border border-white/20 hover:border-white/40 transition-colors" >
-                            Explore logs
-                        </Link>
+                <div className="rounded-[18px] overflow-hidden relative min-h-80">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="absolute inset-0 w-full h-full object-cover object-center"/>
+                    <div className="absolute inset-0 bg-linear-to-r from-[#0c1c10] via-[#0c1c10]/80 to-transparent" />
+
+                   
+                    <div className="relative z-10 flex flex-col justify-center h-full px-12 py-16 max-w-lg">
+                        <h2 className="text-3xl font-bold text-white leading-tight mb-4">
+                            Start your first<br />log today.
+                        </h2>
+                        <p className="text-sm text-white/55 leading-relaxed mb-9 max-w-xs">
+                            No followers needed. No algorithm to please. Just you, your journey, and a place to write it down.
+                        </p>
+
+                       {/* buttons */}
+                        <div className="flex flex-col gap-3 items-start">
+                            <button onClick={() => { if (!session) { router.push("/Login"); return } router.push("/newlog") }} className="inline-flex items-center gap-2 bg-white text-[#2D4B37] font-bold text-sm px-7 py-3 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-md">
+                                Create a free log
+                            </button>
+                            <Link href="/logs" className="text-white/60 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white/70 transition-all duration-150">
+                                Or browse existing logs-
+                            </Link>
+                        </div>
                     </div>
+
                 </div>
 
             </div>

@@ -41,15 +41,15 @@ const page = () => {
 
 
   //image upload using cloudinary
-  const uploadimage= async ()=>{
+  const uploadimage = async () => {
     if (!pic) {
       return null
     }
-    const data=  new FormData();
-    data.append('file',pic);
-    data.append('upload_preset','travellog_uploads');
-    const res=await fetch("https://api.cloudinary.com/v1_1/dxey00jzp/image/upload",{method:"POST",body:data});
-    const d=await res.json()
+    const data = new FormData();
+    data.append('file', pic);
+    data.append('upload_preset', 'travellog_uploads');
+    const res = await fetch("https://api.cloudinary.com/v1_1/dxey00jzp/image/upload", { method: "POST", body: data });
+    const d = await res.json()
     return d.secure_url
 
 
@@ -65,8 +65,8 @@ const page = () => {
     setLoading(true)
     setError('')
     try {
-      const imageurl= await uploadimage()
-      const data = { title, country, city, dateOfVisit, categories: selectedCategories, about, bestTimeToVisit, howToGetThere, hiddenGems: [gem1, gem2].filter((g) => g.trim() !== ''), whereToEat, whereToStay, thingsToAvoid,coverPhoto:imageurl }
+      const imageurl = await uploadimage()
+      const data = { title, country, city, dateOfVisit, categories: selectedCategories, about, bestTimeToVisit, howToGetThere, hiddenGems: [gem1, gem2].filter((g) => g.trim() !== ''), whereToEat, whereToStay, thingsToAvoid, coverPhoto: imageurl }
       const res = await fetch('/api/logs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       const result = await res.json()
       if (result.success) { router.push('/explorelogs') } else { setError(result.error || 'Something went wrong.') }
@@ -75,7 +75,7 @@ const page = () => {
     } finally {
       setLoading(false)
     }
-    
+
 
   }
 
@@ -86,15 +86,11 @@ const page = () => {
 
 
         {/* heading section */}
-        <div className="relative bg-[#2D4B37] overflow-hidden" style={{ minHeight: '380px' }}>
+        <div className="relative bg-[#2D4B37] overflow-hidden min-h-95">
 
-
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
-
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
-
-
-          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center"/>
+          <div className="absolute inset-0 bg-linear-to-r from-[#142819]/95 via-[#142819]/50 to-transparent" />
+          <div className="absolute inset-0 bg-black/25" />
 
           {/* Content */}
           <div className="relative z-10 px-6 py-16">

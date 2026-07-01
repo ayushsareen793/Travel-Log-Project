@@ -41,15 +41,11 @@ const Page = () => {
       <div className='w-full min-h-screen'>
 
         {/* heading section */}
-        <div className="relative bg-[#2D4B37] overflow-hidden" style={{ minHeight: '380px' }}>
-
+        <div className="relative bg-[#2D4B37] overflow-hidden min-h-100">
 
           <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
-
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(20,40,25,0.95) 0%, rgba(20,40,25,0.85) 30%, rgba(20,40,25,0.5) 55%, rgba(20,40,25,0.1) 75%, transparent 100%)' }} />
-
-
-          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
+          <div className="absolute inset-0 bg-linear-to-r from-[#142819]/95 via-[#142819]/50 to-transparent" />
+          <div className="absolute inset-0 bg-black/25" />
 
           {/* Content */}
           <div className="relative z-10 px-6 py-16">
@@ -151,19 +147,19 @@ const Page = () => {
               <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-4 pt-5">Latest Log</p>
               <div className='bg-white border border-[#e8e4da] rounded-2xl overflow-hidden mb-4'>
 
-                 {/* if coverPhoto isnt uploaded then show the icon */}
-                  {filtered[0].coverPhoto ? (
-                    <img className='w-full h-72 object-cover' src={filtered[0].coverPhoto} alt={filtered[0].title} />
-                  ) : (
-                    <div className='w-full h-32 bg-[#eef5f1] flex items-center justify-center'>
-                      <img src="https://img.icons8.com/color/48/image.png" className="w-8 h-8 opacity-40" />
-                    </div>
-                  )}
+                {/* if coverPhoto isnt uploaded then show the icon */}
+                {filtered[0].coverPhoto ? (
+                  <img className='w-full h-72 object-cover' src={filtered[0].coverPhoto} alt={filtered[0].title} />
+                ) : (
+                  <div className='w-full h-32 bg-[#eef5f1] flex items-center justify-center'>
+                    <img src="https://img.icons8.com/color/48/image.png" className="w-8 h-8 opacity-40" />
+                  </div>
+                )}
 
                 <div className='p-4'>
                   <p className='font-bold text-sm text-[#1c1c19]'>{filtered[0].title}</p>
                   <p className='text-xs text-gray-500 leading-relaxed line-clamp-2'>{filtered[0].about}</p>
-                  <p className='text-xs text-gray-400'>{filtered[0].country}, {filtered[0].city}</p>
+                  <p className='text-xs text-gray-400'>{filtered[0].city},{filtered[0].country}</p>
                   <div className='flex items-center gap-2'>
                     <div className='w-6 h-6 rounded-full bg-[#2D4B37]/20 flex items-center justify-center text-xs font-bold text-[#2D4B37]'>
                       {filtered[0].author.name[0]}
@@ -183,7 +179,7 @@ const Page = () => {
             <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37]  mb-4 pt-5 max-w-7xl text-start px-6 mx-auto">All Logs</p>
             <div className='pt-5 max-w-7xl mx-auto px-6 py-10 grid grid-cols-2 gap-4'>
               {filtered.slice(1).map((log) => (
-                <div className='bg-white border border-[#e8e4da] rounded-2xl overflow-hidden mb-4' key={log._id}>
+                <div className='bg-white border border-[#e8e4da] rounded-2xl overflow-hidden' key={log._id}>
                   {/* if coverPhoto isnt uploaded then show the icon */}
                   {log.coverPhoto ? (
                     <img className='w-full h-42 object-cover' src={log.coverPhoto} alt={log.title} />
@@ -215,19 +211,27 @@ const Page = () => {
 
         {/* last section */}
         <div className='max-w-5xl mx-auto px-6 py-1'>
-          <div className="bg-[#2D4B37] rounded-[18px] p-12 text-center">
-            <h2 className="text-3xl font-bold text-white mb-3">Add your journey.</h2>
-            <p className="text-sm text-white/55 leading-relaxed mb-6 max-w-sm mx-auto">
-              Been somewhere worth writing about?<br />
-              Your log could help the next traveller find it.
-            </p>
-            <button onClick={() => {
-              if (!session) { router.push("/Login"); return }
-              router.push("/newlog")
-            }}
-              className="inline-block bg-white text-[#2D4B37] text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors">
-              Write a log
-            </button>
+          <div className="rounded-[18px] overflow-hidden relative min-h-80">
+
+            <img src="https://images.unsplash.com/photo-1527489377706-5bf97e608852?q=80&w=1259&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 bg-linear-to-r from-[#0c1c10] via-[#0c1c10]/80 to-transparent" />
+
+            <div className="relative z-10 flex flex-col justify-center h-full px-12 py-16 max-w-lg">
+              <h2 className="text-3xl font-bold text-white leading-tight mb-4">
+                Add your<br />journey.
+              </h2>
+              <p className="text-sm text-white/55 leading-relaxed mb-9 max-w-xs">
+                Been somewhere worth writing about? Your log could help the next traveller find it.
+              </p>
+
+              {/* buttons*/}
+              <div className="flex flex-col gap-3 items-start">
+                <button onClick={() => { if (!session) { router.push("/Login"); return } router.push("/newlog") }} className="inline-flex items-center gap-2 bg-white text-[#2D4B37] font-bold text-sm px-7 py-3 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-md">
+                  Write a log
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
 
