@@ -210,7 +210,7 @@ const Page = () => {
 
 
         {/* last section */}
-        <div className='max-w-5xl mx-auto px-6 py-1'>
+        <div className='max-w-5xl mx-auto px-6 py-1 pb-10'>
           <div className="rounded-[18px] overflow-hidden relative min-h-80">
 
             <img src="https://images.unsplash.com/photo-1527489377706-5bf97e608852?q=80&w=1259&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
