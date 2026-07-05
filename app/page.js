@@ -15,15 +15,15 @@ const page = () => {
     }
     Router.push("/newlog");
   };
-  
 
-  const goToExplore = () => { 
-  if (!session) { 
-    Router.push("/Login"); 
-    return; 
-  } 
-  Router.push("/explorelogs"); 
-};
+
+  const goToExplore = () => {
+    if (!session) {
+      Router.push("/Login");
+      return;
+    }
+    Router.push("/explorelogs");
+  };
 
   return (
     <div className="w-full min-h-screen bg-[#f7f5f0]">
@@ -51,7 +51,10 @@ const page = () => {
         </div>
       </div>
 
-      {/* featured logs - editorial bento grid */}
+
+
+
+      {/* featured logs*/}
       <div className="px-6 md:px-16 py-16">
         <div className="flex items-end justify-between mb-10">
           <div>
@@ -103,7 +106,7 @@ const page = () => {
             </div>
           </div>
 
-          {/* medium card - Darjeeling */}
+          {/* medium card : Darjeeling */}
           <div className="md:col-span-6 group cursor-pointer">
             <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-56">
               <img src="https://plus.unsplash.com/premium_photo-1697730484307-a05ad3449015?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZGFyamVlbGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Darjeeling landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -149,7 +152,7 @@ const page = () => {
                 <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">The Beas river roaring below, apple trees lining every road, and Rohtang Pass disappearing into snowstorms above the clouds.</p>
               </div>
               <div className="flex flex-col items-end gap-2 shrink-0">
-                <span className="text-xs text-[#2D4B37] font-semibold">— Kabir S.</span>
+                <span className="text-xs text-[#2D4B37] font-semibold">-Kabir S.</span>
                 <span className="text-[9px] uppercase tracking-wider text-gray-400">Mountains</span>
               </div>
               <img src="https://img.icons8.com/ios-filled/50/2D4B37/forward-arrow.png" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 shrink-0" />
@@ -172,17 +175,19 @@ const page = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
             <div className="bg-[#2D4B37] hover:bg-[#1e3326] transition-colors duration-200 p-10">
               <div className="flex items-start justify-between mb-8">
-                <span className="text-6xl font-bold text-white/10 leading-none">01</span>
+                <span className="text-6xl font-bold text-white leading-none">01</span>
                 <div className="w-10 h-10 rounded-full bg-[#a8d5b5]/15 flex items-center justify-center">
                   <img src="https://img.icons8.com/ios-filled/50/a8d5b5/marker.png" className="w-5 h-5" />
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Go Somewhere</h3>
-              <p className="text-sm text-white/50 leading-relaxed">Visit a city, a mountain, a beach — anywhere worth remembering. The world is full of stories waiting to be told.</p>
+              <p className="text-sm text-white/50 leading-relaxed">Visit a city, a mountain, a beach - anywhere worth remembering. The world is full of stories waiting to be told.</p>
             </div>
+
+
             <div className="bg-[#2D4B37] hover:bg-[#1e3326] transition-colors duration-200 p-10">
               <div className="flex items-start justify-between mb-8">
-                <span className="text-6xl font-bold text-white/10 leading-none">02</span>
+                <span className="text-6xl font-bold text-white leading-none">02</span>
                 <div className="w-10 h-10 rounded-full bg-[#a8d5b5]/15 flex items-center justify-center">
                   <img src="https://img.icons8.com/ios-filled/50/a8d5b5/pencil.png" className="w-5 h-5" />
                 </div>
@@ -190,9 +195,11 @@ const page = () => {
               <h3 className="text-xl font-bold text-white mb-3">Create Your Log</h3>
               <p className="text-sm text-white/50 leading-relaxed">Add photos, write about the place, drop in hidden gems and tips that only you know about.</p>
             </div>
+
+
             <div className="bg-[#2D4B37] hover:bg-[#1e3326] transition-colors duration-200 p-10">
               <div className="flex items-start justify-between mb-8">
-                <span className="text-6xl font-bold text-white/10 leading-none">03</span>
+                <span className="text-6xl font-bold text-white leading-none">03</span>
                 <div className="w-10 h-10 rounded-full bg-[#a8d5b5]/15 flex items-center justify-center">
                   <img src="https://img.icons8.com/?size=50&id=11735&format=png&color=a8d5b5" alt="People" className="w-5 h-5 object-contain" />
                 </div>
