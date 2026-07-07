@@ -11,7 +11,6 @@ const page = () => {
     return (
         <div className="bg-[#f7f5f0] min-h-screen pb-16 w-full">
 
-            {/* heading */}
             <div className="relative min-h-[75vh] flex flex-col overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
                 <div className="absolute inset-0 bg-linear-to-b from-[#142819]/85 via-[#142819]/55 to-[#f7f5f0]" />
@@ -29,7 +28,7 @@ const page = () => {
             <div className="px-6 md:px-16">
 
                 {/* manifesto */}
-                <div className="py-16 max-w-2xl">
+                <div className="py-16 max-w-full">
                     <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#2D4B37]/50 mb-5">Our manifesto</p>
                     <blockquote className="font-serif text-2xl italic text-[#1c1c19] leading-snug border-l-[3px] border-[#2D4B37] pl-5 mb-6">
                         "Travel is wasted if you can't remember it and meaningless if you can't share it."
@@ -126,7 +125,7 @@ const page = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
 
-                        {/* feature card - wide, 8 cols */}
+                        {/* feature card  */}
                         <div className="md:col-span-8 group cursor-pointer">
                             <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-72">
                                 <img src="https://plus.unsplash.com/premium_photo-1697729628826-ca05ca7f5e8e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kalpa landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -143,7 +142,7 @@ const page = () => {
                             </div>
                         </div>
 
-                        {/* tall card - 4 cols */}
+                        {/* 2nd card */}
                         <div className="md:col-span-4 group cursor-pointer">
                             <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-72">
                                 <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&auto=format&fit=crop" alt="Landour landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -184,7 +183,7 @@ const page = () => {
                 <div className="h-px bg-[#e8e4da]" />
 
                 {/* pledge */}
-                <div className="py-16 max-w-2xl">
+                <div className="py-16 max-w-3xl">
                     <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#2D4B37]/50 mb-6">Our pledge to you</p>
                     <div className="bg-white border border-[#e8e4da] rounded-2xl p-8">
                         <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
