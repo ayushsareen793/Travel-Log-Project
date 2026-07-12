@@ -12,10 +12,7 @@ const page = () => {
         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=1600&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="absolute inset-0 bg-linear-to-b from-[#142819]/75 via-[#142819]/50 to-[#0c1c10]/90"/>
 
-        {/* brand */}
-        <div className="relative z-10 px-14 pt-12">
-          <span className="text-[9px] font-bold uppercase tracking-[5px] text-[#a8d5b5]">TravelLog</span>
-        </div>
+        
 
         {/* headline */}
         <div className="relative z-10 mt-auto px-14 pb-16">

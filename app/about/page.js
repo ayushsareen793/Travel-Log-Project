@@ -12,7 +12,7 @@ const page = () => {
         <div className="bg-[#f7f5f0] min-h-screen pb-16 w-full">
 
             <div className="relative min-h-[75vh] flex flex-col overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
                 <div className="absolute inset-0 bg-linear-to-b from-[#142819]/85 via-[#142819]/55 to-[#f7f5f0]" />
             
               {/* content */}

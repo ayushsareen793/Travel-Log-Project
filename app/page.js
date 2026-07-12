@@ -42,7 +42,6 @@ const page = () => {
           <div className="flex flex-wrap gap-3">
             <button onClick={goToNewLog} type="button" className="inline-flex items-center gap-2 bg-white text-[#2D4B37] font-semibold text-sm px-6 py-3 rounded-full hover:bg-[#eef5f1] transition-all duration-150 shadow-lg">
               Start a New Log
-              <img src="https://img.icons8.com/ios-filled/50/2D4B37/forward-arrow.png" className="w-3.5 h-3.5" />
             </button>
             <Link href="/about">
               <button type="button" className="text-white/60 hover:text-white text-sm font-medium border border-white/20 px-6 py-3 rounded-full hover:border-white/40 transition-all duration-150">About Us</button>
@@ -227,7 +226,6 @@ const page = () => {
             <div className="flex flex-col items-start gap-4">
               <button type="button" onClick={goToNewLog} className="inline-flex items-center gap-2.5 bg-white text-[#2D4B37] font-bold text-sm px-8 py-3.5 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-xl">
                 Create Your First Log
-                <img src="https://img.icons8.com/ios-filled/50/2D4B37/forward-arrow.png" className="w-3.5 h-3.5" />
               </button>
               <button type="button" onClick={goToExplore} className="text-white/50 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white/50 transition-all duration-150">
                 Or browse existing logs
