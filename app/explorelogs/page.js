@@ -46,11 +46,11 @@ const Page = () => {
       <div className="relative min-h-[70vh] flex flex-col overflow-hidden">
         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="absolute inset-0 bg-linear-to-b from-[#142819]/85 via-[#142819]/55 to-[#f7f5f0]" />
-       
+
         <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-16 pt-24 pb-20">
           <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5] mb-6">Explore Logs</p>
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-[1.05] mb-6 max-w-2xl">
-            Real places told by,<br /><span className="italic text-[#a8d5b5]">real sunseekers.</span>
+            Real Places Told By,<br /><span className="italic text-[#a8d5b5]">Real Sunseekers.</span>
           </h1>
           <p className="text-sm text-white/55 leading-relaxed max-w-sm">Every log here was written by someone who actually showed up. No sponsored content, no SEO fluff.</p>
         </div>
@@ -228,11 +228,10 @@ const Page = () => {
 
           <div className="relative z-10 flex flex-col justify-center h-full px-10 md:px-16 py-16 max-w-lg">
             <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5] mb-5">Contribute</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">Add your <span className="italic text-[#a8d5b5]">journey.</span></h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">Add Your <span className="italic text-[#a8d5b5]">Journey.</span></h2>
             <p className="text-sm text-white/50 leading-relaxed mb-9 max-w-xs">Been somewhere worth writing about? Your log could help the next traveller find it.</p>
-            <button onClick={() => { if (!session) { router.push("/Login"); return } router.push("/newlog") }} className="inline-flex items-center gap-2 bg-white text-[#2D4B37] font-bold text-sm px-7 py-3 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-md">
-              Write a log
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+            <button onClick={() => { if (!session) { router.push("/Login"); return } router.push("/newlog") }} className=" w-fit inline-flex items-center gap-2 bg-white text-[#2D4B37] font-bold text-sm px-5 py-2 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-md">
+              Write A Log
             </button>
           </div>
         </div>

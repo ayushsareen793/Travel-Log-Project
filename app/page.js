@@ -36,7 +36,7 @@ const page = () => {
         <div className="relative z-10 flex-1 flex flex-col justify-center  px-6 md:px-16 pt-32 pb-32">
           <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5] mb-6">Community Travel Logs</p>
           <h1 className="text-5xl md:text-7xl font-bold text-white leading-[1.05] mb-6 max-w-3xl">
-            Where will<br /><span className="italic text-[#a8d5b5]">you go next?</span>
+            Where Will<br /><span className="italic text-[#a8d5b5]">You Go Next?</span>
           </h1>
           <p className="text-sm text-white/55 leading-relaxed max-w-sm mb-9">Curated travel logs from adventurers exploring the world's most extraordinary places.</p>
           <div className="flex flex-wrap gap-3">
@@ -62,7 +62,6 @@ const page = () => {
           </div>
           <button type="button" onClick={goToExplore} className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-[#2D4B37] hover:gap-3 transition-all duration-200">
             View all
-            <img src="https://img.icons8.com/ios-filled/50/2D4B37/forward-arrow.png" className="w-3 h-3" />
           </button>
         </div>
 
@@ -154,7 +153,6 @@ const page = () => {
                 <span className="text-xs text-[#2D4B37] font-semibold">-Kabir S.</span>
                 <span className="text-[9px] uppercase tracking-wider text-gray-400">Mountains</span>
               </div>
-              <img src="https://img.icons8.com/ios-filled/50/2D4B37/forward-arrow.png" className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 shrink-0" />
             </div>
           </div>
 
@@ -169,7 +167,7 @@ const page = () => {
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'repeating-linear-gradient(90deg, white 0px, white 1px, transparent 1px, transparent 80px), repeating-linear-gradient(0deg, white 0px, white 1px, transparent 1px, transparent 80px)' }} />
         <div className="relative z-10 px-6 md:px-16 py-20">
           <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5]/60 mb-3">Get started</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-14">Three steps to your <span className="italic text-[#a8d5b5]">travel log.</span></h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-14">Three Steps To Your <span className="italic text-[#a8d5b5]">Travel Log.</span></h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
             <div className="bg-[#2D4B37] hover:bg-[#1e3326] transition-colors duration-200 p-10">
@@ -221,14 +219,14 @@ const page = () => {
 
           <div className="relative z-10 flex flex-col justify-center h-full px-10 md:px-16 py-20 max-w-xl">
             <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5] mb-5">Start today</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5">Ready to document your <span className="italic text-[#a8d5b5]">next adventure?</span></h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5">Ready To Document Your <span className="italic text-[#a8d5b5]">Next Adventure?</span></h2>
             <p className="text-sm text-white/50 leading-relaxed mb-10 max-w-sm">Join thousands of travellers sharing honest stories, hidden gems and unforgettable moments from all around the world.</p>
             <div className="flex flex-col items-start gap-4">
               <button type="button" onClick={goToNewLog} className="inline-flex items-center gap-2.5 bg-white text-[#2D4B37] font-bold text-sm px-8 py-3.5 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-xl">
                 Create Your First Log
               </button>
-              <button type="button" onClick={goToExplore} className="text-white/50 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white/50 transition-all duration-150">
-                Or browse existing logs
+              <button type="button" onClick={goToExplore} className="text-white/50  hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white/50 transition-all duration-150">
+                Or Browse Existing Logs
               </button>
             </div>
           </div>

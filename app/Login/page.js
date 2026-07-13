@@ -1,4 +1,3 @@
-
 "use client"
 import { useSession, signIn, signOut } from "next-auth/react"
 import React from 'react'
@@ -26,7 +25,7 @@ const page = () => {
         </div>
       </div>
 
-      {/* right - form */}
+      {/* right - login section */}
       <div className="flex-1 flex flex-col items-center justify-center px-8 md:px-14 xl:px-20 py-16">
 
         <div className="lg:hidden mb-10 self-start">
@@ -42,19 +41,19 @@ const page = () => {
           <div className="flex flex-col gap-3 mb-8">
             <div className="flex items-center gap-3">
               <div className="w-6 h-6 rounded-full bg-[#eef5f1] flex items-center justify-center shrink-0">
-                <svg className="w-3 h-3 text-[#2D4B37]" fill="none" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <svg className="w-3 h-3 text-[#2D4B37]" fill="none" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
               <span className="text-sm text-gray-600">Access and manage your travel logs</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="w-6 h-6 rounded-full bg-[#eef5f1] flex items-center justify-center shrink-0">
-                <svg className="w-3 h-3 text-[#2D4B37]" fill="none" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <svg className="w-3 h-3 text-[#2D4B37]" fill="none" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
               <span className="text-sm text-gray-600">Save hidden gems and travel tips</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="w-6 h-6 rounded-full bg-[#eef5f1] flex items-center justify-center shrink-0">
-                <svg className="w-3 h-3 text-[#2D4B37]" fill="none" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <svg className="w-3 h-3 text-[#2D4B37]" fill="none" viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
               <span className="text-sm text-gray-600">Join the community of travellers</span>
             </div>

@@ -14,12 +14,12 @@ const page = () => {
             <div className="relative min-h-[75vh] flex flex-col overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
                 <div className="absolute inset-0 bg-linear-to-b from-[#142819]/85 via-[#142819]/55 to-[#f7f5f0]" />
-            
-              {/* content */}
+
+                {/* content */}
                 <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-16 pt-24 pb-16">
                     <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5] mb-6">About Our Story</p>
                     <h1 className="text-4xl md:text-6xl font-bold text-white leading-[1.05] mb-6 max-w-2xl">
-                        Built for travellers<br />who go <span className="italic text-[#a8d5b5]">off script.</span>
+                        Built For Travellers<br />Who Go <span className="italic text-[#a8d5b5]">Off Script.</span>
                     </h1>
                     <p className="text-sm text-white/55 leading-relaxed max-w-sm">We didn't build TravelLog for the highlight reel. We built it for the missed trains, the hidden alleys, the meals that changed everything and the people brave enough to write it all down.</p>
                 </div>
@@ -216,17 +216,16 @@ const page = () => {
                         <div className="absolute inset-0 bg-linear-to-r from-[#0c1c10]/90 via-[#0c1c10]/60 to-transparent" />
 
                         <div className="relative z-10 flex flex-col justify-center h-full px-10 md:px-16 py-16 max-w-lg">
-                            <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5] mb-5">Join us</p>
-                            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">Start your first <span className="italic text-[#a8d5b5]">log today.</span></h2>
+                            <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5] mb-5">Join Us</p>
+                            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">Start Your First <span className="italic text-[#a8d5b5]">Log Today.</span></h2>
                             <p className="text-sm text-white/50 leading-relaxed mb-9 max-w-xs">No followers needed. No algorithm to please. Just you, your journey, and a place to write it down.</p>
 
                             <div className="flex flex-col gap-3 items-start">
                                 <button onClick={() => { if (!session) { router.push("/Login"); return } router.push("/newlog") }} className="inline-flex items-center gap-2 bg-white text-[#2D4B37] font-bold text-sm px-7 py-3 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-md">
-                                    Create a free log
-                                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                                    Create A Free Log
                                 </button>
                                 <Link href="/logs" className="text-white/60 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white/70 transition-all duration-150">
-                                    Or browse existing logs
+                                    Or Browse Existing Logs
                                 </Link>
                             </div>
                         </div>
