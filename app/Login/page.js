@@ -17,7 +17,7 @@ const page = () => {
         <div className="relative z-10 mt-auto px-14 pb-16">
           <p className="text-[9px] font-bold uppercase tracking-[5px] text-[#a8d5b5]/60 mb-5">Welcome back</p>
           <h1 className="text-5xl xl:text-6xl font-bold text-white leading-[1.08] mb-6">
-            Your journeys,<br /><span className="italic text-[#a8d5b5]">beautifully<br />logged.</span>
+            Your Journeys,<br /><span className="italic text-[#a8d5b5]">Beautifully<br/>Logged.</span>
           </h1>
           <p className="text-sm text-white/45 leading-relaxed max-w-xs">
             Document the places you've been, the hidden gems you've found, and the moments worth remembering.
@@ -34,7 +34,7 @@ const page = () => {
 
         <div className="w-full max-w-sm bg-white border border-[#e8e4da] rounded-2xl p-10 shadow-xs">
           <p className="text-[9px] font-bold uppercase tracking-[5px] text-[#2D4B37]/50 mb-4">Sign in</p>
-          <h2 className="text-3xl font-bold text-[#1c1c19] mb-3 leading-snug">Good to have<br />you back.</h2>
+          <h2 className="text-4xl font-bold text-[#1c1c19] mb-3 leading-snug">Good To Have You Back.</h2>
           <p className="text-sm text-gray-500 leading-relaxed mb-8">Sign in to access your logs and document your next adventure.</p>
 
           {/* what you get section */}

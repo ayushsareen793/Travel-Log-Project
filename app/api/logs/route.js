@@ -3,7 +3,7 @@ import Log from "@/models/Log";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-// POST:called when user clicks Publish
+// this POST req called when user clicks Publish
 export async function POST(req) {
   try {
     const session = await getServerSession(authOptions);
@@ -30,7 +30,7 @@ export async function POST(req) {
   }
 }
 
-// GET — called when explore page loads
+// GET  called when explore page loads
 export async function GET() {
   try {
     await connectDB();

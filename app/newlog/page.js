@@ -83,7 +83,7 @@ const page = () => {
         <div className="relative z-10 flex-1 flex flex-col justify-end px-6 md:px-16 pt-16 pb-14">
           <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-6">New Log Entry</p>
 
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Name Your Journey…" maxLength={80} className="w-full bg-transparent text-white placeholder:text-white/30 font-bold text-4xl md:text-6xl leading-tight focus:outline-none border-b-2 border-white/20 focus:border-[#a8d5b5] pb-3 transition-colors duration-150" />
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Name Your Journey.." maxLength={80} className="w-full bg-transparent text-white placeholder:text-white/30 font-bold text-4xl md:text-6xl leading-tight focus:outline-none border-b-2 border-white/20 focus:border-[#a8d5b5] pb-3 transition-colors duration-150" />
 
           <div className="flex flex-wrap items-center gap-2 mt-6">
             <img src="https://img.icons8.com/color/48/marker.png" className="w-4 h-4" />

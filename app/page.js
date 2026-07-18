@@ -73,7 +73,7 @@ const page = () => {
               <img src="https://plus.unsplash.com/premium_photo-1697729628826-ca05ca7f5e8e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kalpa landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-linear-to-t from-[#0c1c10]/90 via-[#0c1c10]/30 to-transparent" />
               <div className="absolute top-4 left-4">
-                <span className="text-[9px] font-bold uppercase tracking-[3px] bg-[#a8d5b5]/20 backdrop-blur-sm text-[#a8d5b5] px-3 py-1 rounded-full">Mountains</span>
+                <span className="text-[9px] font-bold uppercase tracking-[3px] bg-[#a8d5b5]/20 backdrop-blur-sm text-white px-3 py-1 rounded-full">Mountains</span>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-7">
                 <div className="flex items-center gap-1.5 text-white/50 text-xs mb-2">
@@ -132,26 +132,6 @@ const page = () => {
                 <h3 className="text-xl font-bold text-white leading-snug mb-1">Dal Lake at Dawn</h3>
                 <p className="text-xs text-white/50 line-clamp-1 mb-2">Waking up on a houseboat as mist lifts off Dal Lake, shikaras gliding past, the Himalayas appearing slowly through the fog.</p>
                 <span className="text-xs text-[#a8d5b5] font-medium">— Zara K.</span>
-              </div>
-            </div>
-          </div>
-
-          {/* full-width text card */}
-          <div className="md:col-span-12 group cursor-pointer">
-            <div className="bg-white rounded-3xl border border-[#e8e4da] hover:border-[#2D4B37]/30 hover:shadow-lg transition-all duration-200 p-7 flex flex-col md:flex-row md:items-center gap-6">
-              <div className="shrink-0 w-12 h-12 rounded-2xl bg-[#eef5f1] flex items-center justify-center">
-                <img src="https://img.icons8.com/color/48/mountain.png" className="w-6 h-6" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 text-gray-500 text-xs mb-1.5">
-                  <img src="https://img.icons8.com/ios-filled/50/6b7268/marker.png" className="w-3 h-3" /> Manali, India
-                </div>
-                <h3 className="text-xl font-bold text-[#1c1c19] mb-1">Snow Peaks & Apple Orchards</h3>
-                <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">The Beas river roaring below, apple trees lining every road, and Rohtang Pass disappearing into snowstorms above the clouds.</p>
-              </div>
-              <div className="flex flex-col items-end gap-2 shrink-0">
-                <span className="text-xs text-[#2D4B37] font-semibold">-Kabir S.</span>
-                <span className="text-[9px] uppercase tracking-wider text-gray-400">Mountains</span>
               </div>
             </div>
           </div>
