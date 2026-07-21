@@ -219,7 +219,7 @@ const page = () => {
                 <img src="https://img.icons8.com/color/48/diamond.png" className="w-5 h-5" />
               </div>
               <div className="flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#2D4B37]/40 mb-2">Gem I</p>
+                <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#2D4B37]/40 mb-2">Gem 1</p>
                 <textarea value={gem1} onChange={(e) => setGem1(e.target.value)} placeholder="eg. Food Spots" rows={3} className="w-full bg-transparent text-sm text-[#1c1c19] placeholder:text-gray-400 focus:outline-none resize-none leading-relaxed" />
               </div>
             </div>
@@ -230,7 +230,7 @@ const page = () => {
                 <img src="https://img.icons8.com/color/48/diamond.png" className="w-5 h-5" />
               </div>
               <div className="flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#2D4B37]/40 mb-2">Gem II</p>
+                <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#2D4B37]/40 mb-2">Gem 2</p>
                 <textarea value={gem2} onChange={(e) => setGem2(e.target.value)} placeholder="eg. Secret Waterfall Between The Trek" rows={3} className="w-full bg-transparent text-sm text-[#1c1c19] placeholder:text-gray-400 focus:outline-none resize-none leading-relaxed" />
               </div>
             </div>

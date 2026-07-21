@@ -9,6 +9,7 @@ const Navbar = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const dropdownRef = useRef(null)
     const pathname=usePathname()
+    
 
     // Close dropdown when clicking outside:useEffect()
     //     Think of it like a Security Guard
@@ -28,6 +29,8 @@ const Navbar = () => {
         document.addEventListener("mousedown", handleClickOutside)
         return () => document.removeEventListener("mousedown", handleClickOutside)
     }, [])
+
+    if (pathname.startsWith('/logs/')) return null
 
     return (
         <nav className="absolute top-0 left-0 right-0 z-20">
@@ -83,7 +86,7 @@ const Navbar = () => {
                             )}
                         </div>
                     ) : (
-                        // ── Hide login button on /Login page ──
+                        //  Hide login button on /Login page using usepathname
                         pathname !== "/Login" && (
                             <Link href="/Login">
                                 <button className="text-sm font-semibold text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2.5 transition-all duration-150" type="button">
