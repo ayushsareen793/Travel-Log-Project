@@ -288,7 +288,7 @@ const page = () => {
             {selectedCategories.includes('Train Travel') && (<span className="text-[10px] bg-[#eef5f1] text-[#2D4B37] px-2.5 py-1 rounded-full font-medium">Train Travel</span>)}
             {selectedCategories.includes('Road Trip') && (<span className="text-[10px] bg-[#eef5f1] text-[#2D4B37] px-2.5 py-1 rounded-full font-medium">Road Trip</span>)}
           </div>
-          <button type="button" onClick={handleSubmit} disabled={loading} className="shrink-0 bg-[#2D4B37] hover:bg-[#1e3326] text-white font-medium text-sm px-7 py-3 rounded-xl transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#2D4B37]/20">
+          <button type="button" onClick={handleSubmit} disabled={loading} className="shrink-0 inline-flex bg-[#2D4B37] hover:bg-[#1e3326] text-white font-medium text-sm px-7 py-3 rounded-xl transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#2D4B37]/20">
             {loading ? 'Publishing...' : 'Publish Log'}
           </button>
         </div>

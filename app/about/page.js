@@ -3,6 +3,7 @@ import react from "react"
 import Link from "next/link"
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { ArrowRight, ArrowLeft } from 'lucide-react'
 
 const page = () => {
     const { data: session } = useSession()
@@ -223,6 +224,7 @@ const page = () => {
                             <div className="flex flex-col gap-3 items-start">
                                 <button onClick={() => { if (!session) { router.push("/Login"); return } router.push("/newlog") }} className="inline-flex items-center gap-2 bg-white text-[#2D4B37] font-bold text-sm px-7 py-3 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-md">
                                     Create A Free Log
+                                    <ArrowRight className="w-3.5 h-3.5" />
                                 </button>
                                 <Link href="/logs" className="text-white/60 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white/70 transition-all duration-150">
                                     Or Browse Existing Logs

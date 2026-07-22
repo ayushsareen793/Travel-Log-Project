@@ -3,6 +3,7 @@ import React from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { ArrowRight, ArrowLeft } from 'lucide-react'
 
 const page = () => {
   const { data: session } = useSession()
@@ -204,8 +205,9 @@ const page = () => {
             <div className="flex flex-col items-start gap-4">
               <button type="button" onClick={goToNewLog} className="inline-flex items-center gap-2.5 bg-white text-[#2D4B37] font-bold text-sm px-8 py-3.5 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-xl">
                 Create Your First Log
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
-              <button type="button" onClick={goToExplore} className="text-white/50  hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white/50 transition-all duration-150">
+              <button type="button" onClick={goToExplore} className="text-white/50   hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white/50 transition-all duration-150">
                 Or Browse Existing Logs
               </button>
             </div>

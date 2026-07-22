@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { ArrowRight, ArrowLeft } from 'lucide-react'
 
 const Page = () => {
   const { data: session } = useSession()
@@ -254,6 +255,7 @@ const Page = () => {
               <p className="text-sm text-white/50 leading-relaxed mb-9 max-w-xs">Been somewhere worth writing about? Your log could help the next traveller find it.</p>
               <button onClick={gotoexplore} className='w-fit inline-flex items-center gap-2 bg-white text-[#2D4B37] font-bold text-sm px-5 py-2 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150 shadow-md'>
                 Write A Log
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
