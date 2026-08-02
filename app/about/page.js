@@ -160,24 +160,6 @@ const page = () => {
                             </div>
                         </div>
 
-                        {/* horizontal featur card */}
-                        <div className="md:col-span-12 group cursor-pointer">
-                            <div className="bg-white rounded-3xl border border-[#e8e4da] hover:border-[#2D4B37]/30 hover:shadow-lg transition-all duration-200 p-6 flex flex-col md:flex-row md:items-center gap-5">
-                                <div className="w-full md:w-48 h-32 rounded-2xl overflow-hidden shrink-0">
-                                    <img src="https://images.unsplash.com/photo-1614591276564-7b3e69347a48?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGthc2htaXJ8ZW58MHx8MHx8fDA%3D" alt="Kashmir landscape" className="w-full h-full object-cover" />
-                                </div>
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-2 text-gray-400 text-xs mb-1.5">
-                                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" /></svg>
-                                        Kashmir, India
-                                    </div>
-                                    <h3 className="text-lg font-bold text-[#1c1c19] mb-1">Dal Lake at Dawn</h3>
-                                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">Waking up on a houseboat as mist lifts off Dal Lake, shikaras gliding past, the Himalayas appearing slowly through the fog.</p>
-                                </div>
-                                <span className="text-xs text-[#2D4B37] font-semibold shrink-0">— Zara K.</span>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -226,7 +208,7 @@ const page = () => {
                                     Create A Free Log
                                     <ArrowRight className="w-3.5 h-3.5" />
                                 </button>
-                                <Link href="/logs" className="text-white/60 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white/70 transition-all duration-150">
+                                <Link href="/explorelogs" className="text-white/60 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white/70 transition-all duration-150">
                                     Or Browse Existing Logs
                                 </Link>
                             </div>
