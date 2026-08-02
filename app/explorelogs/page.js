@@ -139,9 +139,9 @@ const Page = () => {
           <>
 
 
-            {/* latest logs  */}
+            {/* recent logs  */}
             <div className="px-6 md:px-16 pt-6 pb-4">
-              <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-6">Latest Log</p>
+              <p className="text-lg font-bold uppercase tracking-[3px] text-[#2D4B37] mb-6"> RECENT Log</p>
 
               <Link href={`/logs/${filtered[0]._id}`} className="block">
                 {filtered[0].coverPhoto ? (
