@@ -6,8 +6,14 @@ import { usePathname } from 'next/navigation'
 const Footer = () => {
     const pathname = usePathname()
 
-    // footer ko hide kr deta h login page pe 
-    if (pathname === "/Login") return null
+    // footer ko hide kr deta h jo bhi page array me h  
+     const hideFooterOn = ["/Login", "/newlog"]
+
+     //hides for individual page , [id]
+     const startsWithHidden=["/logs/"]
+      if (hideFooterOn.includes(pathname) || startsWithHidden.some((p) => pathname.startsWith(p))) {
+        return null
+    }
 
     return (
         <footer className="bg-[#2D4B37] relative overflow-hidden">
@@ -60,7 +66,7 @@ const Footer = () => {
                     <span className="text-white/40 text-xs">
                         © 2026 <Link href="/" className="text-white/60 hover:text-white transition-colors">Travel Log</Link>. All Rights Reserved.
                     </span>
-                    <span className="text-white/30 text-[10px] uppercase tracking-widest">Built with Next.js</span>
+                    <span className="text-white/30 text-[10px] uppercase tracking-widest">Built For The Realest</span>
                 </div>
             </div>
         </footer>

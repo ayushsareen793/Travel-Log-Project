@@ -8,7 +8,7 @@ const page = () => {
   const { data: session } = useSession()
   const router = useRouter()
   const fileinputref = useRef(null)
-
+  
   // states for all fields
   const [title, setTitle] = useState('')
   const [country, setCountry] = useState('')
@@ -71,6 +71,7 @@ const page = () => {
   const formattedDate = dateOfVisit
     ? new Date(dateOfVisit).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
     : null
+
 
   return (
     <div className="w-full min-h-screen bg-[#f7f5f0]">

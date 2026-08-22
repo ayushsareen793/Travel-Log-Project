@@ -1,8 +1,7 @@
-
 "use client"
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
@@ -14,7 +13,7 @@ const Page = () => {
   const [loading, setloading] = useState(true)
   const [search, setsearch] = useState('')
   const [activecategory, setactivecategory] = useState("all")
-
+  
   // filter logs based on search and category
   const filtered = logs.filter((log) => {
     const matchSearch = log.title.toLowerCase().includes(search.toLowerCase())
