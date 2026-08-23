@@ -24,5 +24,5 @@ const LogSchema = new mongoose.Schema(
   { timestamps: true }
 
 );
-
+LogSchema.index({ createdAt: -1 });
 export default mongoose.models.Log || mongoose.model("Log", LogSchema);

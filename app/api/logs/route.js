@@ -34,7 +34,7 @@ export async function POST(req) {
 export async function GET() {
   try {
     await connectDB();
-    const logs = await Log.find().sort({ createdAt: -1 });
+    const logs = await Log.find().sort({ createdAt: -1 }).lean();
     return Response.json({ success: true, logs }, { status: 200 });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
