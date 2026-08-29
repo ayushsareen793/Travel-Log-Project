@@ -2,12 +2,13 @@
 import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ArrowLeft } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Share2 } from 'lucide-react'
 
 const Page = () => {
     const { id } = useParams()
     const [log, setlog] = useState(null)
     const [loading, setloading] = useState(true)
+    const [copied, setCopied] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -50,6 +51,39 @@ const Page = () => {
 
     const aboutText = log.about || ''
 
+
+// for the sharing of the log using link 
+     const handleShare = async () => {
+        const shareUrl = typeof window !== "undefined" ? window.location.href : ""
+        const shareData = {
+            title: log.title,
+            text: `Check out this travel log: ${log.title}`,
+            url: shareUrl,
+        }
+
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData)
+            } catch (err) {
+
+            }
+        } else {
+            try {
+                await navigator.clipboard.writeText(shareUrl)
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2000)
+            } catch (err) {
+                console.error("Couldn't copy link", err)
+            }
+        }
+    }
+
+
+
+
+
+
+
     return (
         <div className="w-full min-h-screen bg-[#f7f5f0]">
 
@@ -64,9 +98,16 @@ const Page = () => {
                 <div className="absolute inset-0 bg-linear-to-r from-[#0c1c10]/80 via-[#0c1c10]/20 to-transparent" />
 
                 {/* back button */}
-                <button onClick={() => router.back()} className="fixed top-6 left-6 md:left-10 z-50 flex items-center gap-2 bg-[#2D4B37] text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-[#1e3326] transition-all duration-150 shadow-lg">
+                <button onClick={() => router.back()} className="absolute top-6 left-6 md:left-10 z-50 flex items-center gap-2 bg-[#2D4B37] text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-[#1e3326] transition-all duration-150 shadow-lg">
                     <ArrowLeft className="w-3.5 h-3.5" />
                     Back
+                </button>
+
+
+                 {/* share button */}
+                <button onClick={handleShare} className="absolute top-6 right-6 md:right-10 z-50 flex items-center gap-2 bg-white text-[#2D4B37] text-xs font-bold px-4 py-2.5 rounded-full hover:bg-[#eef5f1] transition-all duration-150 shadow-lg">
+                    <Share2 className="w-3.5 h-3.5" />
+                    {copied ? "Copied!" : "Share"}
                 </button>
 
 
@@ -139,7 +180,7 @@ const Page = () => {
                 </div>
             </div>
 
-            {/* story section - sidebar + pull quote */}
+            {/* story section  */}
             <div className="bg-[#f7f5f0]">
                 <div className="px-6 md:px-14 xl:px-20 py-20 md:py-28">
                     <div className="grid md:grid-cols-12 gap-12 md:gap-16">
@@ -174,6 +215,9 @@ const Page = () => {
                 </div>
             </div>
 
+
+
+
             {/* besttimetovisit & howtogetthere section */}
             {(log.bestTimeToVisit || log.howToGetThere) && (
                 <div className="bg-[#2D4B37] text-white">
@@ -193,6 +237,9 @@ const Page = () => {
                             </div>
                         )}
 
+
+
+
                         {log.howToGetThere && (
                             <div className="px-6 md:px-14 py-20 md:py-18 bg-[#23391f]">
                                 <div className="flex items-start gap-4 mb-8">
@@ -210,6 +257,9 @@ const Page = () => {
                     </div>
                 </div>
             )}
+
+
+
 
             {/* hidden gems section */}
             {log.hiddenGems && log.hiddenGems.length > 0 && (

@@ -1,5 +1,5 @@
 "use client"
-import react from "react"
+import react, { useState } from "react"
 import Link from "next/link"
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"
@@ -8,6 +8,19 @@ import { ArrowRight, ArrowLeft } from 'lucide-react'
 const page = () => {
     const { data: session } = useSession()
     const router = useRouter()
+    const [destination, setDestination] = useState("")
+
+    //interactive option jo directly redirect new log ko krta h 
+    const handleDestinationSubmit = (e) => {
+        e.preventDefault()
+        if (!destination.trim())
+        return
+        if (!session) {
+            router.push("/Login")
+            return
+        }
+        router.push(`/newlog?destination=${encodeURIComponent(destination.trim())}`)
+    }
 
     return (
         <div className="bg-[#f7f5f0] min-h-screen pb-16 w-full">
@@ -22,7 +35,7 @@ const page = () => {
                     <h1 className="text-4xl md:text-6xl font-bold text-white leading-[1.05] mb-6 max-w-2xl">
                         Built For Travellers<br />Who Go <span className="italic text-[#a8d5b5]">Off Script.</span>
                     </h1>
-                    <p className="text-sm text-white/55 leading-relaxed max-w-sm">We didn't build TravelLog for the highlight reel. We built it for the missed trains, the hidden alleys, the meals that changed everything and the people brave enough to write it all down.</p>
+                    <p className="text-sm text-white/55  leading-relaxed max-w-sm">We didn't build TravelLog for the highlight reel. We built it for the missed trains, the hidden alleys, the meals that changed everything and the people brave enough to write it all down.</p>
                 </div>
             </div>
 
@@ -120,77 +133,71 @@ const page = () => {
 
 
 
-                {/* from the community  */}
+                {/* where did you go section */}
                 <div className="py-16">
-                    <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#2D4B37]/50 mb-8">From the community</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#2D4B37]/50 mb-8">Start here</p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-
-                        {/* feature card  */}
-                        <div className="md:col-span-8 group cursor-pointer">
-                            <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-72">
-                                <img src="https://plus.unsplash.com/premium_photo-1697729628826-ca05ca7f5e8e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kalpa landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                                <div className="absolute inset-0 bg-linear-to-t from-[#0c1c10]/90 via-[#0c1c10]/30 to-transparent" />
-                                <div className="absolute bottom-0 left-0 right-0 p-7">
-                                    <div className="flex items-center gap-1.5 text-white/50 text-xs mb-2">
-                                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" /></svg>
-                                        Kalpa, India
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-white mb-2 leading-snug">Kinner Kailash at Sunrise</h3>
-                                    <p className="text-sm text-white/60 leading-relaxed line-clamp-2 max-w-lg mb-3">A forgotten village in Kinnaur where apple blossoms frame the Kinner Kailash peak turning gold and pink as the first light hits the snow.</p>
-                                    <span className="text-xs text-[#a8d5b5] font-medium">— Priya S.</span>
-                                </div>
-                            </div>
+                    <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] px-8 md:px-16 py-16 md:py-24 text-center">
+                        <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'repeating-linear-gradient(90deg, white 0px, white 1px, transparent 1px, transparent 60px), repeating-linear-gradient(0deg, white 0px, white 1px, transparent 1px, transparent 60px)' }} />
+                        <div className="relative z-10 max-w-xl mx-auto">
+                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">Where did you go?</h3>
+                            <p className="text-sm text-white/50 mb-8">Type a place. We'll start your log there.</p>
+                            <form onSubmit={handleDestinationSubmit} className="flex flex-col sm:flex-row gap-3">
+                                <input value={destination}  onChange={(e) => setDestination(e.target.value)} type="text" placeholder="e.g. Kyoto, Japan" className="flex-1 px-5 py-3.5 rounded-full text-sm text-white bg-white/10 border border-white/20 focus:border-[#a8d5b5] focus:outline-none placeholder:text-white/30 backdrop-blur-sm"/>
+                                <button type="submit" className="bg-white text-[#2D4B37] font-bold text-sm px-7 py-3.5 rounded-full hover:bg-[#eef5f1] active:scale-95 transition-all duration-150">
+                                    Start Writing
+                                </button>
+                            </form>
                         </div>
-
-                        {/* 2nd card */}
-                        <div className="md:col-span-4 group cursor-pointer">
-                            <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-72">
-                                <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&auto=format&fit=crop" alt="Landour landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                                <div className="absolute inset-0 bg-linear-to-t from-[#0c1c10]/90 via-transparent to-transparent" />
-                                <div className="absolute bottom-0 left-0 right-0 p-5">
-                                    <div className="flex items-center gap-1.5 text-white/50 text-xs mb-1.5">
-                                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" /></svg>
-                                        Landour, India
-                                    </div>
-                                    <h3 className="text-lg font-bold text-white leading-snug mb-1">The Quiet Hills of Landour</h3>
-                                    <p className="text-xs text-white/50 line-clamp-2 mb-2">Tucked above Mussoorie, cobbled lanes and pine forests that smell like another century.</p>
-                                    <span className="text-xs text-[#a8d5b5] font-medium">— Arjun M.</span>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
                 <div className="h-px bg-[#e8e4da]" />
 
-                {/* pledge */}
-                <div className="py-16 max-w-3xl">
+                {/* pledge section */}
+                <div className="py-16">
                     <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#2D4B37]/50 mb-6">Our pledge to you</p>
-                    <div className="bg-white border border-[#e8e4da] rounded-2xl p-8">
-                        <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
-                            We will never show ads or sponsored content inside your logs.
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                        <div className="lg:col-span-7 bg-white border border-[#e8e4da] rounded-2xl p-8">
+                            <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
+                                We will never show ads or sponsored content inside your logs.
+                            </div>
+                            <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
+                                We will never sell your data to third parties.
+                            </div>
+                            <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
+                                We will never rank your logs by follower count or engagement.
+                            </div>
+                            <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
+                                Your logs belong to you; export them anytime, no questions asked.
+                            </div>
+                            <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed">
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
+                                We will always prioritise depth and honesty over virality.
+                            </div>
                         </div>
-                        <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
-                            We will never sell your data to third parties.
+
+                        {/* field-notebook note — fills the space beside the pledge list */}
+                        <div className="lg:col-span-5">
+                            <div className="relative bg-[#fffdf7] rounded-sm p-8 h-full flex flex-col justify-center rotate-1 border border-[#e8e4da] shadow-[0_10px_30px_rgba(0,0,0,0.08)]" style={{ backgroundImage: 'repeating-linear-gradient(transparent, transparent 27px, #e8e4da 28px, transparent 29px)' }}>
+                                
+                                <div className="absolute -top-3 left-10 w-16 h-6 bg-[#a8d5b5]/70 -rotate-3 shadow-sm" />
+
+                                <p className="font-serif italic text-lg text-[#1c1c19] leading-relaxed mb-6">
+                                    "Every promise on the left, I mean to keep. Not because a policy says so - because it's the app I always wanted to build for the realest sunseekers out there."
+                                </p>
+                                <p className="text-xs uppercase tracking-[3px] text-[#2D4B37]/60 font-bold"> - Ayush Sareen, one log at a time</p>
+                            </div>
                         </div>
-                        <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
-                            We will never rank your logs by follower count or engagement.
-                        </div>
-                        <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed mb-4">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
-                            Your logs belong to you; export them anytime, no questions asked.
-                        </div>
-                        <div className="flex items-start gap-3 text-sm text-gray-500 leading-relaxed">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#2D4B37] shrink-0 mt-2" />
-                            We will always prioritise depth and honesty over virality.
-                        </div>
+
                     </div>
-                </div>
+                </div> 
 
                 {/* last section */}
                 <div className="pb-4">

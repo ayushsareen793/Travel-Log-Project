@@ -54,85 +54,95 @@ const page = () => {
 
 
 
-      {/* featured logs*/}
+      {/* featured logs — examples or samples only */}
       <div className="px-6 md:px-16 py-16">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#2D4B37]/50 mb-2">From our community</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1c1c19]">Featured Logs</h2>
+            <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#2D4B37]/50 mb-2">See what's possible</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1c1c19]">This Could Be <span className="italic text-[#2D4B37]">Your Log</span></h2>
           </div>
-          <button type="button" onClick={goToExplore} className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-[#2D4B37] hover:gap-3 transition-all duration-200">
-            View all
+          <button type="button" onClick={goToNewLog} className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-[#2D4B37] hover:gap-3 transition-all duration-200">
+            Create yours <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
 
           {/* feature card */}
-          <div className="md:col-span-8 group cursor-pointer">
+          <div className="md:col-span-8 group">
             <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-80">
               <img src="https://plus.unsplash.com/premium_photo-1697729628826-ca05ca7f5e8e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kalpa landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-linear-to-t from-[#0c1c10]/90 via-[#0c1c10]/30 to-transparent" />
-              <div className="absolute top-4 left-4">
+              <div className="absolute top-4 left-4 flex gap-2">
                 <span className="text-[9px] font-bold uppercase tracking-[3px] bg-[#a8d5b5]/20 backdrop-blur-sm text-white px-3 py-1 rounded-full">Mountains</span>
+                <span className="text-[9px] font-bold uppercase tracking-[3px] bg-white/90 text-[#2D4B37] px-3 py-1 rounded-full">Example</span>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-7">
                 <div className="flex items-center gap-1.5 text-white/50 text-xs mb-2">
                   <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" className="w-3 h-3" /> Kalpa, India
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-snug">Kinner Kailash at Sunrise</h3>
-                <p className="text-sm text-white/60 leading-relaxed line-clamp-2 max-w-lg mb-4">A forgotten village in Kinnaur where apple blossoms frame the Kinner Kailash peak turning gold and pink as the first light hits the snow.</p>
-                <span className="text-xs text-[#a8d5b5] font-medium">— Priya S.</span>
+                <p className="text-sm text-white/60 leading-relaxed line-clamp-2 max-w-lg">A forgotten village in Kinnaur where apple blossoms frame the Kinner Kailash peak turning gold and pink as the first light hits the snow.</p>
               </div>
             </div>
           </div>
 
+
           {/* square card */}
-          <div className="md:col-span-4 group cursor-pointer">
+          <div className="md:col-span-4 group">
             <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-80">
               <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&auto=format&fit=crop" alt="Landour landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-linear-to-t from-[#0c1c10]/90 via-transparent to-transparent" />
-              <div className="absolute top-4 left-4">
+              <div className="absolute top-4 left-4 flex gap-2">
                 <span className="text-[9px] font-bold uppercase tracking-[3px] bg-white/15 backdrop-blur-sm text-white px-3 py-1 rounded-full">Off-the-grid</span>
+                <span className="text-[9px] font-bold uppercase tracking-[3px] bg-white/90 text-[#2D4B37] px-3 py-1 rounded-full">Example</span>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <div className="flex items-center gap-1.5 text-white/50 text-xs mb-1.5">
                   <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" className="w-3 h-3" /> Landour, India
                 </div>
-                <h3 className="text-xl font-bold text-white leading-snug mb-3">The Quiet Hills of Landour</h3>
-                <span className="text-xs text-[#a8d5b5] font-medium">— Arjun M.</span>
+                <h3 className="text-xl font-bold text-white leading-snug">The Quiet Hills of Landour</h3>
               </div>
             </div>
           </div>
 
+
+
           {/* medium card : Darjeeling */}
-          <div className="md:col-span-6 group cursor-pointer">
+          <div className="md:col-span-6 group">
             <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-56">
               <img src="https://plus.unsplash.com/premium_photo-1697730484307-a05ad3449015?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZGFyamVlbGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Darjeeling landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-linear-to-t from-[#0c1c10]/85 via-transparent to-transparent" />
+              <div className="absolute top-4 left-4">
+                <span className="text-[9px] font-bold uppercase tracking-[3px] bg-white/90 text-[#2D4B37] px-3 py-1 rounded-full">Example</span>
+              </div>
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <div className="flex items-center gap-1.5 text-white/50 text-xs mb-1.5">
                   <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" className="w-3 h-3" /> Darjeeling, India
                 </div>
                 <h3 className="text-xl font-bold text-white leading-snug mb-1">Tea Gardens & Toy Trains</h3>
-                <p className="text-xs text-white/50 line-clamp-1 mb-2">Rolling green tea estates, the smell of first flush in the air, and a tiny steam train winding through the clouds toward Kanchenjunga.</p>
-                <span className="text-xs text-[#a8d5b5] font-medium">— Riya B.</span>
+                <p className="text-xs text-white/50 line-clamp-1">Rolling green tea estates, the smell of first flush in the air, and a tiny steam train winding through the clouds toward Kanchenjunga.</p>
               </div>
             </div>
           </div>
 
+
+          
+
           {/* medium card:Kashmir */}
-          <div className="md:col-span-6 group cursor-pointer">
+          <div className="md:col-span-6 group">
             <div className="relative rounded-3xl overflow-hidden bg-[#1a3020] h-56">
               <img src="https://images.unsplash.com/photo-1614591276564-7b3e69347a48?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGthc2htaXJ8ZW58MHx8MHx8fDA%3D" alt="Kashmir landscape" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-linear-to-t from-[#0c1c10]/85 via-transparent to-transparent" />
+              <div className="absolute top-4 left-4">
+                <span className="text-[9px] font-bold uppercase tracking-[3px] bg-white/90 text-[#2D4B37] px-3 py-1 rounded-full">Example</span>
+              </div>
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <div className="flex items-center gap-1.5 text-white/50 text-xs mb-1.5">
                   <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" className="w-3 h-3" /> Kashmir, India
                 </div>
                 <h3 className="text-xl font-bold text-white leading-snug mb-1">Dal Lake at Dawn</h3>
-                <p className="text-xs text-white/50 line-clamp-1 mb-2">Waking up on a houseboat as mist lifts off Dal Lake, shikaras gliding past, the Himalayas appearing slowly through the fog.</p>
-                <span className="text-xs text-[#a8d5b5] font-medium">— Zara K.</span>
+                <p className="text-xs text-white/50 line-clamp-1">Waking up on a houseboat as mist lifts off Dal Lake, shikaras gliding past, the Himalayas appearing slowly through the fog.</p>
               </div>
             </div>
           </div>
