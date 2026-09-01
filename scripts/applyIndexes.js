@@ -8,7 +8,7 @@ async function apply() {
   console.log("Connected to MongoDB");
   
   await Log.syncIndexes();
-  console.log("✅ Index created successfully!");
+  console.log("Index created successfully!");
   
   const indexes = await Log.collection.getIndexes();
   console.log("Current indexes:", indexes);
@@ -17,6 +17,6 @@ async function apply() {
 }
 
 apply().catch(err => {
-  console.error("❌ Failed:", err);
+  console.error("Failed:", err);
   process.exit(1);
 });

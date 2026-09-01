@@ -23,6 +23,9 @@ const Page = () => {
         gettingdata()
     }, [id])
 
+
+
+//loading dikhane ke liye
     if (loading) {
         return (
             <div className="w-full min-h-screen bg-[#f7f5f0] flex items-center justify-center">
