@@ -81,31 +81,6 @@ Optimized the travel logs API by adding MongoDB indexes and implementing `.lean(
 
 ---
 
-## Lighthouse Score (Frontend Performance)
-
-### Before Optimization
-| Category | Score |
-|----------|-------|
-| Performance | [MEASURE AND FILL] |
-| Accessibility | [MEASURE AND FILL] |
-| Best Practices | [MEASURE AND FILL] |
-| SEO | [MEASURE AND FILL] |
-
-### After Optimization
-| Category | Score |
-|----------|-------|
-| Performance | [MEASURE AND FILL] |
-| Accessibility | [MEASURE AND FILL] |
-| Best Practices | [MEASURE AND FILL] |
-| SEO | [MEASURE AND FILL] |
-
-### Frontend Optimizations Applied
-- Added `loading="lazy"` to grid card images (below-the-fold)
-- Added `priority` prop to featured/hero image for eager loading
-- Added meta description and title tags in `app/layout.js`
-
----
-
 ## Key Takeaways
 - **Index alone** eliminated `COLLSCAN`, replacing it with `IXSCAN`.
 - **`.lean()`** reduced Mongoose document hydration overhead.
@@ -118,8 +93,6 @@ Optimized the travel logs API by adding MongoDB indexes and implementing `.lean(
 - `models/Log.js` — Added `createdAt` descending index
 - `app/api/logs/route.js` — Added `.lean()` to query
 - `scripts/applyIndexes.js` — Index application script
-- `app/layout.js` — Added metadata for SEO/Lighthouse
-- `app/explorelogs/page.js` — Added image loading optimizations
 
 ## Seeded Data
 - 8,000 dummy travel logs inserted via `seed.js`
