@@ -26,20 +26,8 @@ const page = () => {
         <div className="bg-[#f7f5f0] min-h-screen pb-16 w-full">
 
             <div className="relative min-h-[75vh] flex flex-col overflow-hidden">
-                <img
-                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format"
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover object-center hero-kenburns"
-                />
-
-                {/* drifting cloud layer — above the image, below the gradient's darkest band */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="hero-cloud hero-cloud-1" />
-                    <div className="hero-cloud hero-cloud-2" />
-                    <div className="hero-cloud hero-cloud-3" />
-                </div>
-
-                <div className="absolute inset-0 bg-linear-to-b from-[#142819]/70 via-[#142819]/45 to-[#f7f5f0]" />
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+                <div className="absolute inset-0 bg-linear-to-b from-[#142819]/85 via-[#142819]/55 to-[#f7f5f0]" />
 
                 {/* content */}
                 <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-16 pt-24 pb-16">
@@ -236,58 +224,6 @@ const page = () => {
                 </div>
 
             </div>
-
-            <style>{`
-                .hero-kenburns {
-                    animation: hero-kenburns 24s ease-in-out infinite alternate;
-                    transform-origin: 55% 40%;
-                }
-                @keyframes hero-kenburns {
-                    0%   { transform: scale(1) translate(0, 0); }
-                    100% { transform: scale(1.12) translate(-1.5%, -1%); }
-                }
-
-                .hero-cloud {
-                    position: absolute;
-                    border-radius: 50%;
-                    filter: blur(28px);
-                    mix-blend-mode: screen;
-                    will-change: transform;
-                }
-                .hero-cloud-1 {
-                    top: 6%;
-                    left: -35%;
-                    width: 55%;
-                    height: 32%;
-                    background: radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.5) 40%, rgba(255,255,255,0) 72%);
-                    animation: hero-drift 50s linear infinite;
-                }
-                .hero-cloud-2 {
-                    top: 16%;
-                    left: -45%;
-                    width: 42%;
-                    height: 24%;
-                    background: radial-gradient(ellipse at center, rgba(168,213,181,0.85) 0%, rgba(168,213,181,0.4) 45%, rgba(168,213,181,0) 72%);
-                    animation: hero-drift 70s linear infinite;
-                    animation-delay: -18s;
-                }
-                .hero-cloud-3 {
-                    top: -2%;
-                    left: -30%;
-                    width: 35%;
-                    height: 20%;
-                    background: radial-gradient(ellipse at center, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0) 72%);
-                    animation: hero-drift 90s linear infinite;
-                    animation-delay: -40s;
-                }
-                @keyframes hero-drift {
-                    from { transform: translateX(0%); }
-                    to   { transform: translateX(260%); }
-                }
-                @media (prefers-reduced-motion: reduce) {
-                    .hero-kenburns, .hero-cloud { animation: none !important; }
-                }
-            `}</style>
         </div>
     )
 }
