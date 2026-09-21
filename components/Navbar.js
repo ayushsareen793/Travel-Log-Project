@@ -37,9 +37,14 @@ const Navbar = () => {
             <div className="w-full flex items-center justify-between px-6 md:px-16 py-6">
 
                 {/* Logo */}
-                <Link href="/" className="flex items-center space-x-3">
-                    <span className="text-2xl text-white font-bold tracking-tighter">TravelLog</span>
-                    <img src="/globe.gif" alt="globe" height={10} width={43} />
+                <Link href="/" className="flex items-center">
+                    <span className="inline-flex items-center text-2xl text-white font-bold tracking-tighter leading-none">
+                        TravelL
+                        <span className="relative inline-block w-[1.5em] h-[1.5em] mx-[0.02em] translate-y-[0.06em] rounded-full overflow-hidden align-middle shrink-0">
+                            <img src="/globe.gif" alt="o" className="absolute inset-0 w-full h-full object-cover" />
+                        </span>
+                        g
+                    </span>
                 </Link>
 
                 <div className="flex items-center">
