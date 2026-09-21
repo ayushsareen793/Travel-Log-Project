@@ -78,8 +78,21 @@ const page = () => {
 
       {/* heading section */}
       <div className="relative min-h-[70vh] flex flex-col overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
-        <div className="absolute inset-0 bg-linear-to-b from-[#142819]/85 via-[#142819]/55 to-[#f7f5f0]" />
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center origin-[55%_40%] animate-[hero-kenburns_24s_ease-in-out_infinite_alternate] motion-reduce:animate-none" />
+
+
+
+
+        {/* drifting cloud layer effect */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[6%] left-[-35%] w-[55%] h-[32%] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.5)_40%,rgba(255,255,255,0)_72%)] animate-[hero-drift_50s_linear_infinite] motion-reduce:animate-none" />
+          <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[16%] left-[-45%] w-[42%] h-[24%] bg-[radial-gradient(ellipse_at_center,rgba(168,213,181,0.85)_0%,rgba(168,213,181,0.4)_45%,rgba(168,213,181,0)_72%)] animate-[hero-drift_70s_linear_infinite] [animation-delay:-18s] motion-reduce:animate-none" />
+          <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[-2%] left-[-30%] w-[35%] h-[20%] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.35)_45%,rgba(255,255,255,0)_72%)] animate-[hero-drift_90s_linear_infinite] [animation-delay:-40s] motion-reduce:animate-none" />
+        </div>
+
+
+
+        <div className="absolute inset-0 bg-linear-to-b from-[#142819]/70 via-[#142819]/45 to-[#f7f5f0]" />
 
         <div className="relative z-10 flex-1 flex flex-col justify-end px-6 md:px-16 pt-16 pb-14">
           <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a8d5b5] mb-6">New Log Entry</p>
