@@ -8,8 +8,8 @@ const Navbar = () => {
     const { data: session } = useSession()
     const [showDropdown, setShowDropdown] = useState(false)
     const dropdownRef = useRef(null)
-    const pathname=usePathname()
-    
+    const pathname = usePathname()
+
 
     // Close dropdown when clicking outside:useEffect()
     //     Think of it like a Security Guard
@@ -82,7 +82,7 @@ const Navbar = () => {
 
                                         <li>
                                             {/*  signOut */}
-                                            <button onClick={() => { setShowDropdown(false); signOut() }} className="inline-flex items-center w-full p-2 hover:bg-white/10 rounded text-red-300" >
+                                            <button onClick={() => { setShowDropdown(false); signOut({ callbackUrl: "/" }) }} className="inline-flex items-center w-full p-2 hover:bg-white/10 rounded text-red-300">
                                                 Sign out
                                             </button>
                                         </li>
