@@ -187,7 +187,7 @@ To deploy your own copy, import the repo into Vercel and add the same environmen
 
 ## 👤 Author
 
-**Piyush**
+**Ayush Sareen**
 - GitHub: [@ayushsareen793](https://github.com/ayushsareen793)
 
 ---
