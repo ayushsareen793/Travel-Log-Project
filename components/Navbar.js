@@ -3,6 +3,7 @@ import Link from "next/link"
 import React, { useState, useEffect, useRef } from "react"
 import { useSession, signIn, signOut } from "next-auth/react"
 import { usePathname } from "next/navigation"
+import { Compass } from "lucide-react"
 
 const Navbar = () => {
     const { data: session } = useSession()
@@ -31,19 +32,17 @@ const Navbar = () => {
     }, [])
 
     if (pathname.startsWith('/logs/')) return null
+    if (pathname === '/Login') return null
 
     return (
         <nav className="absolute top-0 left-0 right-0 z-20">
             <div className="w-full flex items-center justify-between px-6 md:px-16 py-6">
 
                 {/* Logo */}
-                <Link href="/" className="flex items-center">
-                    <span className="inline-flex items-center text-2xl text-white font-bold tracking-tighter leading-none">
-                        TravelL
-                        <span className="relative inline-block w-[1.5em] h-[1.5em] mx-[0.02em] translate-y-[0.06em] rounded-full overflow-hidden align-middle shrink-0">
-                            <img src="/globe.gif" alt="o" className="absolute inset-0 w-full h-full object-cover" />
-                        </span>
-                        g
+                <Link href="/" className="flex items-center gap-2 group">
+                    <Compass size={18} className="text-[#a8d5b5] transition-transform duration-500 ease-out group-hover:rotate-180" />
+                    <span className="text-sm font-bold uppercase tracking-[3px] text-white">
+                        Travel<span className="text-[#a8d5b5]">Log</span>
                     </span>
                 </Link>
 

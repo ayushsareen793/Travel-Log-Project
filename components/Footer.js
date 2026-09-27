@@ -1,10 +1,21 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 const Footer = () => {
     const pathname = usePathname()
+    const router = useRouter()
+    const { data: session } = useSession()
+
+    // If not logged in, user ko pehle login krne ko bolta h login page pe redirect krke 
+    const handleExploreClick = (e, href) => {
+        if (!session) {
+            e.preventDefault()
+            router.push(`/Login?callbackUrl=${encodeURIComponent(href)}`)
+        }
+    }
 
     // footer ko hide kr deta h jo bhi page array me h  
      const hideFooterOn = ["/Login", "/newlog"]
@@ -33,10 +44,10 @@ const Footer = () => {
                     <div>
                         <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a8d5b5]/60 mb-4">Explore</p>
                         <div className="flex flex-col gap-2.5">
-                            <Link href="/" className="text-white/50 hover:text-white text-sm transition-colors w-fit">Home</Link>
-                            <Link href="/about" className="text-white/50 hover:text-white text-sm transition-colors w-fit">About Us</Link>
-                            <Link href="/explorelogs" className="text-white/50 hover:text-white text-sm transition-colors w-fit">Explore Logs</Link>
-                            <Link href="/newlog" className="text-white/50 hover:text-white text-sm transition-colors w-fit">New Log</Link>
+                            <Link href="/" onClick={(e) => handleExploreClick(e, "/")} className="text-white/50 hover:text-white text-sm transition-colors w-fit">Home</Link>
+                            <Link href="/about" onClick={(e) => handleExploreClick(e, "/about")} className="text-white/50 hover:text-white text-sm transition-colors w-fit">About Us</Link>
+                            <Link href="/explorelogs" onClick={(e) => handleExploreClick(e, "/explorelogs")} className="text-white/50 hover:text-white text-sm transition-colors w-fit">Explore Logs</Link>
+                            <Link href="/newlog" onClick={(e) => handleExploreClick(e, "/newlog")} className="text-white/50 hover:text-white text-sm transition-colors w-fit">New Log</Link>
                         </div>
                     </div>
 
@@ -52,7 +63,7 @@ const Footer = () => {
                                 className="w-8 h-8 rounded-full bg-[#a8d5b5]/15 hover:bg-[#a8d5b5]/25 flex items-center justify-center transition-colors">
                                 <img src="https://img.icons8.com/ios-filled/50/a8d5b5/new-post.png" alt="Email" width={16} height={16} />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.linkedin.com/in/ayush-sareen-792283255" target="_blank" rel="noopener noreferrer"
                                 className="w-8 h-8 rounded-full bg-[#a8d5b5]/15 hover:bg-[#a8d5b5]/25 flex items-center justify-center transition-colors">
                                 <img src="https://img.icons8.com/ios-filled/50/a8d5b5/linkedin.png" alt="LinkedIn" width={16} height={16} />
                             </a>
