@@ -4,7 +4,7 @@
 
 **Create, share, and explore travel logs — one destination at a time.**
 
-A place to write down where you went, what it was actually like, and the hidden gems worth knowing — then browse everyone else's.
+A place to write down where you went, what it was actually like, and the hidden gems worth knowing — then browse everyone else's, in a grid or on an interactive map.
 
 [Live Demo](https://travel-log-project-psi.vercel.app) · [Report a Bug](https://github.com/ayushsareen793/Travel-Log-Project/issues)
 
@@ -16,12 +16,14 @@ A place to write down where you went, what it was actually like, and the hidden 
 
 Travel-Log is a full-stack travel journaling app where users sign in, write detailed logs about places they've visited — cover photo, best time to visit, hidden gems, where to eat and stay, what to avoid — and publish them for others to browse and search. It's part personal travel diary, part crowdsourced destination guide.
 
-Built with the Next.js App Router, authenticated with NextAuth, image uploads handled through Cloudinary, and data persisted in MongoDB.
+Built with the Next.js App Router, authenticated with NextAuth, image uploads handled through Cloudinary, places and maps powered by Mapbox, and data persisted in MongoDB.
 
 ### ✨ Key Features
 
 - 🔐 **OAuth Authentication** — Sign in with GitHub or Google via NextAuth; a `User` document is created automatically on first login
 - ✍️ **Rich Travel Logs** — Each log captures title, country, city, date of visit, categories, cover photo, a full write-up, best time to visit, how to get there, hidden gems, where to eat, where to stay, and things to avoid
+- 📍 **Place Search** — Search for a destination while writing a log (Mapbox SearchBox); the city, country, and coordinates are filled in from the result
+- 🗺️ **Interactive Map View** — Every log with a saved location appears as a pin on a Mapbox map at `/maps`. Nearby pins group into numbered clusters that split apart as you zoom, and clicking a pin opens a preview that links to the full log
 - 🖼️ **Cloudinary Image Uploads** — Cover photos are uploaded directly to Cloudinary from the browser and the resulting URL is stored with the log
 - 🔎 **Explore Page** — Browse all published logs with live search (by title) and category filtering
 - 📄 **Individual Log Pages** — Each log gets its own detail page at `/logs/[id]`
@@ -44,6 +46,8 @@ Built with the Next.js App Router, authenticated with NextAuth, image uploads ha
 | **Authentication** | [NextAuth.js](https://next-auth.js.org/) (GitHub & Google OAuth providers) |
 | **Database** | [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/) |
 | **Image Hosting** | [Cloudinary](https://cloudinary.com/) (unsigned upload preset) |
+| **Maps & Place Search** | [Mapbox](https://www.mapbox.com/) — [Search JS](https://docs.mapbox.com/mapbox-search-js/) (SearchBox) and [react-map-gl](https://visgl.github.io/react-map-gl/) (map, markers, popups) |
+| **Pin Clustering** | [supercluster](https://github.com/mapbox/supercluster) via `use-supercluster` |
 | **Deployment** | [Vercel](https://vercel.com/) |
 
 ---
@@ -55,15 +59,44 @@ Built with the Next.js App Router, authenticated with NextAuth, image uploads ha
 | **Deployment** | Live on Vercel with continuous deployment from GitHub |
 | **OAuth providers** | 2 (GitHub, Google) |
 | **Database models** | 2 (User, Log) |
-| **Database indexes added** | 1 (`createdAt` descending on `logs`) |
+| **Database indexes added** | 2 (`createdAt` descending, and `lat` + `lng` compound, both on `logs`) |
 | **API endpoints** | 3 (GET all logs, POST a log, GET a log by id) |
-| **Pages / routes** | 6 (landing, login, about, new log, explore logs, log detail) |
+| **Pages / routes** | 7 (landing, login, about, new log, explore logs, log detail, map view) |
 | **Reusable components** | 3 (Navbar, Footer, SessionWrapper) |
-| **Log fields** | 13 user-entered fields plus author attribution |
+| **Log fields** | 13 user-entered fields plus author attribution and location coordinates |
 | **Load-test dataset** | 8,000 seeded travel logs |
 | **Collection scans eliminated** | `COLLSCAN` → `IXSCAN` + `FETCH` |
 | **Query work reduced** | 50% (16,006 → 8,003 work units) |
 | **API response time at scale** | 41% faster (887 ms → 527 ms) |
+
+---
+
+## 🗺️ Interactive Map
+
+The map is a second way to browse the same logs. The Explore page is best for reading and comparing (photos, categories, search); the map answers a question the grid can't: **what's near what?**
+
+### How it works
+
+1. On the **New Log** form, the user searches for a place with the Mapbox SearchBox (results are limited to places, localities, regions, and countries, so businesses don't show up).
+2. When a result is selected, the city, country, and coordinates (`lat`, `lng`) are stored in the form state.
+3. On publish, the coordinates are sent to `POST /api/logs` along with the rest of the log. The API already saves the full request body, so no backend route change was needed.
+4. The `/maps` page fetches `GET /api/logs`, drops any log without coordinates (older logs created before this feature), and converts the rest into GeoJSON points.
+5. The points, the map's current zoom level, and its visible bounds are passed to supercluster, which returns a mix of **clusters** (a numbered circle) and **single points** (a pin).
+6. The map's view state updates as the user pans and zooms, so clustering is recalculated live.
+7. Clicking a cluster zooms to the level where it splits apart. Clicking a pin opens a popup with the cover photo, title, and city/country, linking to `/logs/[id]`.
+
+### Implementation notes
+
+- **Client-only rendering** — the map and SearchBox use `window` and `document` on import, so they are loaded with `dynamic(..., { ssr: false })` to avoid crashing during server rendering.
+- **Coordinate order** — Mapbox and GeoJSON use `[longitude, latitude]`. The schema stores `lat` and `lng` as separate named fields to avoid mixing the order up when reading them later.
+- **Public token** — the Mapbox access token is a public token, designed to be used in the browser (unlike a secret key). It is exposed through a `NEXT_PUBLIC_` environment variable.
+- **Navigation** — a "Map View" item in the navbar dropdown links to `/maps`.
+
+### Known limitations
+
+- Logs created before this feature have no coordinates, so they don't appear on the map until they are re-saved with a location.
+- Pin accuracy depends on what the Mapbox geocoder returns; it can occasionally resolve to a nearby town's centre.
+- All logs are fetched and clustered at once. At larger scale, this should become a bounded query (only logs inside the visible map area).
 
 ---
 
@@ -125,7 +158,7 @@ The API looked fast with only 2 documents, but `totalKeysExamined: 0` showed the
 - The **`createdAt` index** replaced the collection scan with an index scan that returns logs already in newest-first order.
 - **`.lean()`** skips Mongoose document hydration, which is the main saving when thousands of documents are returned in one request.
 - The combined effect was a **41% faster API response** and **50% fewer work units** at 8,000 records.
-- **Next bottleneck identified:** the endpoint still returns every log in a single 8.1 MB response. Pagination and field projection are on the roadmap.
+- **Next bottleneck identified:** the endpoint still returns every log in a single 8.1 MB response. Pagination and field projection are on the roadmap. The map page reads from the same endpoint, so it benefits from the same fix.
 
 The 8,000 test records were removed after testing, so the live database holds only real logs.
 
@@ -138,8 +171,9 @@ Travel-Log-Project/
 ├── app/
 │   ├── Login/                     # Login page (GitHub / Google OAuth)
 │   ├── about/                     # About page
-│   ├── newlog/                    # Create-a-new-log form (title, photo, write-up, etc.)
+│   ├── newlog/                    # Create-a-new-log form (title, photo, place search, write-up, etc.)
 │   ├── explorelogs/                # Browse all logs — search + category filter
+│   ├── maps/                       # Interactive map view — Mapbox pins + clustering
 │   ├── logs/[id]/                  # Individual log detail page
 │   ├── api/
 │   │   ├── auth/[...nextauth]/route.js   # NextAuth config & sign-in/session callbacks
@@ -149,14 +183,14 @@ Travel-Log-Project/
 │   ├── layout.js                   # Root layout (Navbar, Footer, SessionWrapper)
 │   └── page.js                     # Landing page
 ├── components/
-│   ├── Navbar.js
+│   ├── Navbar.js                   # Includes the "Map View" link
 │   ├── Footer.js
 │   └── SessionWrapper.js           # NextAuth SessionProvider wrapper
 ├── db/
 │   └── Connectdb.js                # Mongoose connection helper (reuses existing connection)
 ├── models/
 │   ├── User.js                     # User schema (name, email, image, provider)
-│   └── Log.js                      # Travel log schema + createdAt index
+│   └── Log.js                      # Travel log schema + createdAt and lat/lng indexes
 ├── scripts/
 │   └── applyIndexes.js             # Applies the MongoDB index
 └── screenshots/                    # Before/after query-plan screenshots
@@ -178,6 +212,7 @@ Travel-Log-Project/
 |---|---|---|
 | `title`, `country` | String | required |
 | `city`, `dateOfVisit` | String / Date | optional |
+| `lat`, `lng` | Number | optional; set from the place search, used to plot the log on the map |
 | `categories` | [String] | array of tags for filtering |
 | `coverPhoto` | String | Cloudinary URL |
 | `about`, `bestTimeToVisit`, `howToGetThere` | String | free-text sections |
@@ -185,7 +220,7 @@ Travel-Log-Project/
 | `whereToEat`, `whereToStay`, `thingsToAvoid` | String | free-text sections |
 | `author` | Object | `{ name, email, image, id }`, stamped from the session at publish time |
 
-**Indexes:** `logs` → `{ createdAt: -1 }`
+**Indexes:** `logs` → `{ createdAt: -1 }`, `{ lat: 1, lng: 1 }`
 
 ---
 
@@ -196,6 +231,7 @@ Travel-Log-Project/
 - Node.js 18+
 - A [MongoDB](https://www.mongodb.com/atlas) database (Atlas or local)
 - A free [Cloudinary](https://cloudinary.com/) account with an **unsigned upload preset**
+- A free [Mapbox](https://www.mapbox.com/) account and **public access token**
 - OAuth apps registered on [GitHub](https://github.com/settings/developers) and [Google Cloud Console](https://console.cloud.google.com/)
 
 ### Installation
@@ -223,6 +259,9 @@ Travel-Log-Project/
    GITHUB_SECRET=your_github_oauth_client_secret
    GOOGLE_CLIENT_ID=your_google_oauth_client_id
    GOOGLE_CLIENT_SECRET=your_google_oauth_client_secret
+
+   # Mapbox (public token, used in the browser)
+   NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_public_access_token
    ```
 
    > **Note:** The Cloudinary cloud name and upload preset are currently hardcoded in `app/newlog/page.js` (cloud name `dxey00jzp`, preset `travellog_uploads`). If you're deploying your own copy, update these to your own Cloudinary account before uploads will work.
@@ -251,11 +290,13 @@ npm run start
 ## 💡 How It Works
 
 1. A user signs in via GitHub or Google. On first login, a `User` document is created automatically from their OAuth profile.
-2. From **New Log**, they fill out a detailed form — trip info, categories, a cover photo, and write-ups for things like best time to visit and hidden gems.
+2. From **New Log**, they fill out a detailed form — trip info, categories, a cover photo, a searched place, and write-ups for things like best time to visit and hidden gems.
 3. The cover photo is uploaded directly to Cloudinary from the browser; the returned secure URL is saved with the log.
-4. On publish, a `POST /api/logs` request checks the session server-side, then creates the `Log` document with the author's name, email, and image attached.
-5. The **Explore Logs** page fetches all logs (`GET /api/logs`, newest first via the `createdAt` index) and lets visitors search by title and filter by category, client-side.
-6. Clicking a log opens its detail page at `/logs/[id]`, which fetches that single log by ID.
+4. The searched place provides the city, country, and coordinates, which are saved with the log.
+5. On publish, a `POST /api/logs` request checks the session server-side, then creates the `Log` document with the author's name, email, and image attached.
+6. The **Explore Logs** page fetches all logs (`GET /api/logs`, newest first via the `createdAt` index) and lets visitors search by title and filter by category, client-side.
+7. The **Map View** page plots every log that has coordinates as a pin, grouping nearby pins into clusters that split apart as the map is zoomed (see [Interactive Map](#️-interactive-map)).
+8. Clicking a log, or a pin's popup, opens its detail page at `/logs/[id]`, which fetches that single log by ID.
 
 ---
 
@@ -265,7 +306,7 @@ This project is deployed on **Vercel** with continuous deployment connected dire
 
 **Live:** [travel-log-project-psi.vercel.app](https://travel-log-project-psi.vercel.app)
 
-To deploy your own copy, import the repo into Vercel and add the same environment variables listed above in the Vercel project settings.
+To deploy your own copy, import the repo into Vercel and add the same environment variables listed above in the Vercel project settings. Use a MongoDB Atlas connection string for `MONGODB_URI` in production, and add the `NEXT_PUBLIC_MAPBOX_TOKEN` variable **before** building: `NEXT_PUBLIC_` variables are embedded at build time, so the map will be blank if the token is added after deploying without a redeploy.
 
 ---
 
@@ -276,7 +317,9 @@ To deploy your own copy, import the repo into Vercel and add the same environmen
 - [ ] Edit and delete existing logs
 - [ ] Per-user "my logs" view
 - [ ] Comments or likes on published logs
-- [ ] Map view of all logged destinations
+- [x] Map view of all logged destinations
+- [ ] Load only the logs inside the visible map area
+- [ ] Let older logs be updated with a location so they appear on the map
 
 ---
 
