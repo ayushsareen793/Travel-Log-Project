@@ -11,7 +11,7 @@ const Navbar = () => {
     const dropdownRef = useRef(null)
     const pathname = usePathname()
 
-
+//drop down working in depth with example taaki easily samjh aa jaae
     // Close dropdown when clicking outside:useEffect()
     //     Think of it like a Security Guard
     // Imagine you hired a security guard to watch the entire page and close the dropdown whenever someone clicks outside it.
@@ -78,6 +78,12 @@ const Navbar = () => {
                                                 Explore Logs
                                             </Link>
                                         </li>
+                                        <li>
+                                            <Link href="/pinmaps" onClick={() => setShowDropdown(false)}
+                                                className="inline-flex items-center w-full p-2 hover:bg-white/10 rounded">
+                                                Map View
+                                            </Link>
+                                        </li>
 
                                         <li>
                                             {/*  signOut */}
@@ -90,7 +96,7 @@ const Navbar = () => {
                             )}
                         </div>
                     ) : (
-                        //  Hide login button on /Login page using usepathname
+                        //  hide krdeta h login button ko /login page pe using pathname
                         pathname !== "/Login" && (
                             <Link href="/Login">
                                 <button className="text-sm font-semibold text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2.5 transition-all duration-150" type="button">

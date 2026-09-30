@@ -4,6 +4,8 @@ const LogSchema = new mongoose.Schema(
   { title: { type: String, required: true },
     country: { type: String, required: true },
     city: { type: String },
+    lat: { type: Number },
+    lng: { type: Number },
     dateOfVisit: { type: Date },
     categories: [{ type: String }],
     coverPhoto: { type: String },
@@ -25,4 +27,5 @@ const LogSchema = new mongoose.Schema(
 
 );
 LogSchema.index({ createdAt: -1 });
+LogSchema.index({ lat: 1, lng: 1 });
 export default mongoose.models.Log || mongoose.model("Log", LogSchema);

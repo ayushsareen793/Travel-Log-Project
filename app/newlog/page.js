@@ -3,16 +3,25 @@ import React, { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useRef } from 'react'
+import dynamic from 'next/dynamic'
+import { MapPin } from 'lucide-react'
+
+//for enabling searchbox 
+const SearchBox = dynamic(
+  () => import('@mapbox/search-js-react').then((mod) => mod.SearchBox),
+  { ssr: false }
+)
 
 const page = () => {
   const { data: session } = useSession()
   const router = useRouter()
   const fileinputref = useRef(null)
-  
+
   // states for all fields
   const [title, setTitle] = useState('')
   const [country, setCountry] = useState('')
   const [city, setCity] = useState('')
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null })
   const [dateOfVisit, setDateOfVisit] = useState('')
   const [selectedCategories, setSelectedCategories] = useState([])
   const [about, setAbout] = useState('')
@@ -57,7 +66,7 @@ const page = () => {
     setError('')
     try {
       const imageurl = await uploadimage()
-      const data = { title, country, city, dateOfVisit, categories: selectedCategories, about, bestTimeToVisit, howToGetThere, hiddenGems: [gem1, gem2].filter((g) => g.trim() !== ''), whereToEat, whereToStay, thingsToAvoid, coverPhoto: imageurl }
+      const data = { title, country, city, lat: coordinates.lat, lng: coordinates.lng, dateOfVisit, categories: selectedCategories, about, bestTimeToVisit, howToGetThere, hiddenGems: [gem1, gem2].filter((g) => g.trim() !== ''), whereToEat, whereToStay, thingsToAvoid, coverPhoto: imageurl }
       const res = await fetch('/api/logs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       const result = await res.json()
       if (result.success) { router.push('/explorelogs') } else { setError(result.error || 'Something went wrong.') }
@@ -77,20 +86,18 @@ const page = () => {
     <div className="w-full min-h-screen bg-[#f7f5f0]">
 
       {/* heading section */}
-      <div className="relative min-h-[70vh] flex flex-col overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center origin-[55%_40%] animate-[hero-kenburns_24s_ease-in-out_infinite_alternate] motion-reduce:animate-none" />
+      <div className="relative min-h-[70vh] flex flex-col">
+        <div className="absolute inset-0 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop&auto=format" alt="" className="absolute inset-0 w-full h-full object-cover object-center origin-[55%_40%] animate-[hero-kenburns_24s_ease-in-out_infinite_alternate] motion-reduce:animate-none" />
 
 
-
-
-        {/* drifting cloud layer effect */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[6%] left-[-35%] w-[55%] h-[32%] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.5)_40%,rgba(255,255,255,0)_72%)] animate-[hero-drift_50s_linear_infinite] motion-reduce:animate-none" />
-          <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[16%] left-[-45%] w-[42%] h-[24%] bg-[radial-gradient(ellipse_at_center,rgba(168,213,181,0.85)_0%,rgba(168,213,181,0.4)_45%,rgba(168,213,181,0)_72%)] animate-[hero-drift_70s_linear_infinite] [animation-delay:-18s] motion-reduce:animate-none" />
-          <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[-2%] left-[-30%] w-[35%] h-[20%] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.35)_45%,rgba(255,255,255,0)_72%)] animate-[hero-drift_90s_linear_infinite] [animation-delay:-40s] motion-reduce:animate-none" />
+          {/* drifting cloud layer effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[6%] left-[-35%] w-[55%] h-[32%] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.5)_40%,rgba(255,255,255,0)_72%)] animate-[hero-drift_50s_linear_infinite] motion-reduce:animate-none" />
+            <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[16%] left-[-45%] w-[42%] h-[24%] bg-[radial-gradient(ellipse_at_center,rgba(168,213,181,0.85)_0%,rgba(168,213,181,0.4)_45%,rgba(168,213,181,0)_72%)] animate-[hero-drift_70s_linear_infinite] [animation-delay:-18s] motion-reduce:animate-none" />
+            <div className="absolute rounded-full blur-[28px] mix-blend-screen will-change-transform top-[-2%] left-[-30%] w-[35%] h-[20%] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.35)_45%,rgba(255,255,255,0)_72%)] animate-[hero-drift_90s_linear_infinite] [animation-delay:-40s] motion-reduce:animate-none" />
+          </div>
         </div>
-
-
 
         <div className="absolute inset-0 bg-linear-to-b from-[#142819]/70 via-[#142819]/45 to-[#f7f5f0]" />
 
@@ -99,11 +106,33 @@ const page = () => {
 
           <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Name Your Journey.." maxLength={80} className="w-full bg-transparent text-white placeholder:text-white/30 font-bold text-4xl md:text-6xl leading-tight focus:outline-none border-b-2 border-white/20 focus:border-[#a8d5b5] pb-3 transition-colors duration-150" />
 
+          {/* automatic location show krta h search krne pe, searchbox ka kaam hi yehi h ki apne app ocation suggest hoti h search krne pe   */}
           <div className="flex flex-wrap items-center gap-2 mt-6">
-            <img src="https://img.icons8.com/color/48/marker.png" className="w-4 h-4" />
-            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" className="w-28 bg-transparent text-white placeholder:text-white/30 text-sm border-b border-white/20 focus:outline-none focus:border-[#a8d5b5] pb-0.5 transition-colors duration-150" />
-            <span className="text-white/40 text-sm">/</span>
-            <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Country" className="w-32 bg-transparent text-white placeholder:text-white/30 text-sm border-b border-white/20 focus:outline-none focus:border-[#a8d5b5] pb-0.5 transition-colors duration-150" />
+            <MapPin className="w-4 h-4 text-[#a8d5b5]" />
+            <div className="w-64 relative z-50">
+              <SearchBox
+                accessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+                placeholder="Search for a city..."
+                options={{
+                  types: 'place,locality,region,country',
+                }}
+                onRetrieve={(result) => {
+                  const feature = result.features[0]
+                  const coords = feature.geometry.coordinates // [lng, lat]
+                  const context = feature.properties.context
+
+                  setCity(context?.place?.name || feature.properties.name || '')
+                  setCountry(context?.country?.name || '')
+                  setCoordinates({ lat: coords[1], lng: coords[0] })
+                }}
+              />
+              {coordinates.lat && (
+                <p className="flex items-center gap-1 text-[10px] text-black font-medium mt-1">
+                  <MapPin className="w-3 h-3 text-black" />
+                  {city}, {country}
+                </p>
+              )}
+            </div>
             {formattedDate && (<><span className="text-white/30 text-sm mx-1">·</span><span className="text-white/60 text-sm">{formattedDate}</span></>)}
             <input type="date" value={dateOfVisit} onChange={(e) => setDateOfVisit(e.target.value)} className="ml-2 text-xs text-white/60 bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 focus:outline-none focus:border-[#a8d5b5] transition-all duration-150" />
           </div>
@@ -313,11 +342,3 @@ const page = () => {
 }
 
 export default page
-
-
-
-
-
-
-
-
