@@ -31,6 +31,7 @@ const Navbar = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside)
     }, [])
 
+    //to prevent navabar to show on these pages
     if (pathname.startsWith('/logs/')) return null
     if (pathname === '/Login') return null
 

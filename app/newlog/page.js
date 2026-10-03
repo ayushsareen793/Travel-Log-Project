@@ -77,9 +77,9 @@ const page = () => {
     }
   }
 
-  const formattedDate = dateOfVisit
-    ? new Date(dateOfVisit).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-    : null
+  //for setting date and month (selecting from calender option)
+  const formattedDate = dateOfVisit ? new Date(dateOfVisit).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : null
+  
 
 
   return (
