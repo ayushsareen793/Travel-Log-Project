@@ -1,57 +1,61 @@
 "use client"
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import useSupercluster from 'use-supercluster'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
+// Mapbox only works in the browser, so we load it with ssr: false
 const Map = dynamic(() => import('react-map-gl/mapbox').then((mod) => mod.default), { ssr: false })
 const Marker = dynamic(() => import('react-map-gl/mapbox').then((mod) => mod.Marker), { ssr: false })
 const Popup = dynamic(() => import('react-map-gl/mapbox').then((mod) => mod.Popup), { ssr: false })
 
-
-const getClusterSize = (pointCount, totalPoints) => {
-  const ratio = pointCount / totalPoints
-  if (ratio < 0.1) return 'w-7 h-7'
-  if (ratio < 0.25) return 'w-9 h-9'
-  if (ratio < 0.5) return 'w-11 h-11'
+// Bigger cluster = bigger circle
+const getClusterSize = (count) => {
+  if (count < 5) return 'w-8 h-8'
+  if (count < 10) return 'w-10 h-10'
+  if (count < 25) return 'w-12 h-12'
   return 'w-14 h-14'
 }
 
 const MapsPage = () => {
   const router = useRouter()
-  const [logs, setLogs] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [selectedLog, setSelectedLog] = useState(null)
-  const mapRef = useRef(null)
 
+  // ---------- STATE ----------
+  const [logs, setLogs] = useState([])               // all logs that have coordinates
+  const [loading, setLoading] = useState(true)       // show "Loading map..." until data comes
+  const [selectedLog, setSelectedLog] = useState(null) // the pin the user clicked (for popup)
+  const [bounds, setBounds] = useState(null)         // visible area of the map
   const [viewState, setViewState] = useState({
-    longitude: 78.9629, // centered roughly around india
+    longitude: 78.9629, // centered around India
     latitude: 20.5937,
     zoom: 4,
   })
 
+  // ---------- FETCH LOGS ----------
   useEffect(() => {
     const fetchLogs = async () => {
       try {
         const res = await fetch('/api/logs')
         const data = await res.json()
+
         if (data.success) {
-          // only keep logs jinke actual coordinates fill kiye h 
-          const withCoords = data.logs.filter((log) => log.lat && log.lng)
-          setLogs(withCoords)
+          // keep only logs which have lat and lng
+          const logsWithCoords = data.logs.filter((log) => log.lat && log.lng)
+          setLogs(logsWithCoords)
         }
-      } catch (err) {
-        console.error('Failed to fetch logs:', err)
-      } finally {
-        setLoading(false)
+      } catch (error) {
+        console.error('Failed to fetch logs:', error)
       }
+      setLoading(false)
     }
+
     fetchLogs()
   }, [])
 
-  // go back to previous page button logic
+  // ---------- BACK BUTTON ----------
   const handleBack = () => {
     if (window.history.length > 1) {
       router.back()
@@ -60,42 +64,45 @@ const MapsPage = () => {
     }
   }
 
-  // logs ko geo json me convert krta h taaki supercluster ko samajha aae
+  // ---------- SAVE VISIBLE MAP AREA ----------
+  // Called when the map loads and every time the user moves/zooms it.
+  // Result looks like: [west, south, east, north]
+  const updateBounds = (event) => {
+    const mapBounds = event.target.getBounds().toArray().flat()
+    setBounds(mapBounds)
+  }
+
+  // ---------- CONVERT LOGS TO GEOJSON ----------
+  // supercluster only understands this format. Note: longitude comes FIRST.
   const points = logs.map((log) => ({
     type: 'Feature',
-    properties: { cluster: false, logId: log._id, log },
+    properties: { cluster: false, log: log },
     geometry: {
       type: 'Point',
       coordinates: [log.lng, log.lat],
     },
   }))
 
-  // current visible map bounds, needed so supercluster only clusters what's on screen
-  const bounds = mapRef.current
-    ? mapRef.current.getMap().getBounds().toArray().flat()
-    : null
-
+  // ---------- GROUP NEARBY PINS ----------
   const { clusters, supercluster } = useSupercluster({
-    points,
-    bounds,
+    points: points,
+    bounds: bounds,
     zoom: viewState.zoom,
     options: { radius: 60, maxZoom: 16 },
   })
 
-  const handleClusterClick = useCallback((clusterId, longitude, latitude) => {
-    const expansionZoom = Math.min(supercluster.getClusterExpansionZoom(clusterId), 20)
-    setViewState((prev) => ({
-      ...prev,
-      longitude,
-      latitude,
-      zoom: expansionZoom,
-    }))
-  }, [supercluster])
+  // ---------- CLICK ON A CLUSTER ----------
+  // Zoom in so the cluster breaks into smaller parts
+  const handleClusterClick = (clusterId, longitude, latitude) => {
+    const newZoom = Math.min(supercluster.getClusterExpansionZoom(clusterId), 20)
+    setViewState({ ...viewState, longitude, latitude, zoom: newZoom })
+  }
 
+  // ---------- UI ----------
   return (
     <div className="relative w-full h-screen">
       {/* Back button */}
-      <button  onClick={handleBack} type="button" aria-label="Go back" className="absolute top-4 left-4 z-10 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-[#2D4B37] shadow-md hover:bg-[#f7f5f0] transition-colors duration-150" >
+      <button onClick={handleBack} type="button" className="absolute top-4 left-4 z-10 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-[#2D4B37] shadow-md hover:bg-[#f7f5f0]">
         <ArrowLeft size={16} />
         Back
       </button>
@@ -105,36 +112,32 @@ const MapsPage = () => {
           <p className="text-sm text-gray-500">Loading map...</p>
         </div>
       ) : (
-        <Map
-          ref={mapRef}
-          mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-          {...viewState}
-          onMove={(evt) => setViewState(evt.viewState)}
-          className="w-full h-full"
-          mapStyle="mapbox://styles/mapbox/light-v11"
-        >
-          {clusters.map((cluster) => {
-            const [longitude, latitude] = cluster.geometry.coordinates
-            const { cluster: isCluster, point_count: pointCount } = cluster.properties
+        <Map mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} {...viewState} onLoad={updateBounds}
+          onMove={(event) => {
+            setViewState(event.viewState)
+            updateBounds(event)
+          }}
+          className="w-full h-full" mapStyle="mapbox://styles/mapbox/light-v11">
+          {clusters.map((item) => {
+            const [longitude, latitude] = item.geometry.coordinates
+            const isCluster = item.properties.cluster
 
-            // render a numbered cluster bubble
+            // CASE 1: it's a group of logs = show a green circle with a number
             if (isCluster) {
+              const count = item.properties.point_count
+
               return (
-                <Marker
-                  key={`cluster-${cluster.id}`}
-                  longitude={longitude}
-                  latitude={latitude}
-                  onClick={() => handleClusterClick(cluster.id, longitude, latitude)}
-                >
-                  <div className={`flex items-center justify-center rounded-full bg-[#2D4B37] text-white text-xs font-bold shadow-md cursor-pointer hover:scale-110 transition-transform ${getClusterSize(pointCount, points.length)}`}>
-                    {pointCount}
+                <Marker key={`cluster-${item.id}`} longitude={longitude} latitude={latitude} onClick={() => handleClusterClick(item.id, longitude, latitude)}>
+                  <div className={`flex items-center justify-center rounded-full bg-[#2D4B37] text-white text-xs font-bold shadow-md cursor-pointer ${getClusterSize(count)}`}>
+                    {count}
                   </div>
                 </Marker>
               )
             }
 
-            // render a single log pin
-            const log = cluster.properties.log
+            // CASE 2: it's a single log = show a small green dot
+            const log = item.properties.log
+
             return (
               <Marker
                 key={`log-${log._id}`}
@@ -145,20 +148,22 @@ const MapsPage = () => {
                   setSelectedLog(log)
                 }}
               >
-                <div className="w-3 h-3 rounded-full bg-[#2D4B37] border-2 border-white shadow-md cursor-pointer hover:scale-125 transition-transform" />
+                <div className="w-3 h-3 rounded-full bg-[#2D4B37] border-2 border-white shadow-md cursor-pointer" />
               </Marker>
             )
           })}
 
+          {/* Popup shows only when a pin is selected */}
           {selectedLog && (
             <Popup longitude={selectedLog.lng} latitude={selectedLog.lat} onClose={() => setSelectedLog(null)} closeOnClick={false} anchor="bottom" >
-              <a href={`/logs/${selectedLog._id}`} className="block w-48">
+              <Link href={`/logs/${selectedLog._id}`} className="block w-48">
                 {selectedLog.coverPhoto && (
-                  <img src={selectedLog.coverPhoto} alt={selectedLog.title} className="w-full h-24 object-cover rounded-md mb-2"/>
-                )}
+                  <img src={selectedLog.coverPhoto} alt={selectedLog.title} className="w-full h-24 object-cover rounded-md mb-2"/> )}
                 <p className="text-sm font-semibold text-[#1c1c19]">{selectedLog.title}</p>
-                <p className="text-xs text-gray-500">{selectedLog.city}, {selectedLog.country}</p>
-              </a>
+                <p className="text-xs text-gray-500">
+                  {selectedLog.city}, {selectedLog.country}
+                </p>
+              </Link>
             </Popup>
           )}
         </Map>
