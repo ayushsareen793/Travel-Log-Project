@@ -31,6 +31,7 @@ Built with the Next.js App Router, authenticated with NextAuth, image uploads ha
 - 👤 **Author Attribution** — Every log is stamped with the publishing user's name, email, and image
 - 🚀 **Indexed Queries** — A `createdAt` index and `.lean()` reads keep the logs API efficient as the collection grows (see [Performance Optimization](#-performance-optimization))
 - 🎨 **Warm, Editorial UI** — A custom cream/forest-green themed design built with Tailwind CSS (no component library)
+- 🚦 **Lighthouse-Optimized Landing Page** — 99 Performance, 100 Accessibility, 100 Best Practices, 100 SEO on mobile (see [Lighthouse Optimization](#-lighthouse-optimization))
 - ⚡ **Deployed on Vercel** — Continuous deployment from GitHub on every push
 
 ---
@@ -68,6 +69,8 @@ Built with the Next.js App Router, authenticated with NextAuth, image uploads ha
 | **Collection scans eliminated** | `COLLSCAN` → `IXSCAN` + `FETCH` |
 | **Query work reduced** | 50% (16,006 → 8,003 work units) |
 | **API response time at scale** | 41% faster (887 ms → 527 ms) |
+| **Lighthouse (mobile, landing page)** | 99 Performance · 100 Accessibility · 100 Best Practices · 100 SEO |
+| **Lighthouse Performance gain** | 84 → 99 on mobile |
 
 ---
 
@@ -164,6 +167,45 @@ The 8,000 test records were removed after testing, so the live database holds on
 
 ---
 
+## 🚦 Lighthouse Optimization
+
+The landing page was audited with [PageSpeed Insights](https://pagespeed.web.dev/) (mobile) on the live Vercel deployment and optimized from a Performance score of 84 to 99.
+
+**Test setup:** PageSpeed Insights, mobile, live URL (`travel-log-project-psi.vercel.app`), tested on 2026-10-14.
+
+| Category | Before | After |
+|---|---|---|
+| **Performance** | 84 | **99** |
+| **Accessibility** | 90 | **100** |
+| **Best Practices** | 100 | **100** |
+| **SEO** | 91 | **100** |
+
+![PageSpeed Insights mobile report: 99 Performance, 100 Accessibility, 100 Best Practices, 100 SEO](screenshots/travel-log-lighthouse-mobile.png)
+
+### What the audit found
+
+- The Largest Contentful Paint element was the hero heading, with a **2,500 ms element render delay** even though time to first byte was 0 ms, so the server and database were not the problem.
+- The page loaded its images as plain `<img>` tags straight from Unsplash with no resizing or compression (PageSpeed estimated 448 KiB of image savings).
+- Six small icons were fetched from a third-party icon host, and most had no alt text.
+- Some light text on photo backgrounds failed contrast checks, and the page title and description were weak for search.
+
+### What changed
+
+| File | Change |
+|---|---|
+| `next.config.mjs` | Allowed the Unsplash hosts under `images.remotePatterns` so `next/image` can optimize them |
+| `app/page.js` | Hero, card, and banner images now use `next/image` (hero uses `priority`, `fill`, and `sizes`); the third-party icon images are now Lucide icons; the decorative hero animations (Ken Burns zoom and drifting clouds) start once the browser is idle instead of during load, and the cloud layers no longer use blur or blend modes; the "About Us" `<button>` nested inside a `<Link>` is now a styled `Link`; low-contrast text was brightened |
+| `app/layout.js` | Improved the page title and description; removed an unused font |
+
+### Key takeaways
+
+- **`next/image`** serves resized, compressed images from the app's own domain, which cut the image weight and removed the third-party connections.
+- **Deferring decorative animations** keeps them from competing with the heading for the first paint, while the hero looks the same on phones and desktop.
+- **Accessibility and SEO** reached 100 through contrast fixes, valid link markup, and proper page metadata.
+- Lighthouse scores vary slightly between runs. These results are lab estimates for the landing page only; the other pages have not been audited yet.
+
+---
+
 ## 📂 Project Structure
 
 ```
@@ -193,7 +235,7 @@ Travel-Log-Project/
 │   └── Log.js                      # Travel log schema + createdAt and lat/lng indexes
 ├── scripts/
 │   └── applyIndexes.js             # Applies the MongoDB index
-└── screenshots/                    # Before/after query-plan screenshots
+└── screenshots/                    # Before/after query-plan and Lighthouse screenshots
 ```
 
 ---
@@ -318,6 +360,7 @@ To deploy your own copy, import the repo into Vercel and add the same environmen
 - [ ] Per-user "my logs" view
 - [ ] Comments or likes on published logs
 - [x] Map view of all logged destinations
+- [x] Lighthouse optimization of the landing page (mobile 99 / 100 / 100 / 100)
 - [ ] Load only the logs inside the visible map area
 - [ ] Let older logs be updated with a location so they appear on the map
 
