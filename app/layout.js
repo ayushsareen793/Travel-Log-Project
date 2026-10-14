@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,19 +9,15 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = {
-  title: "Travel-Log-A travel log book",
-  description: "Your Own Destinations Iternary",
+  title: "TravelLog | Share Your Travel Stories",
+  description:
+    "A community travel journal where you can log trips, add photos and explore destinations on an interactive map.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
       <body className=" bg-[#f7f5f0] text-[#1c1c11]">
         <SessionWrapper>
           <Navbar />
