@@ -182,6 +182,8 @@ The landing page was audited with [PageSpeed Insights](https://pagespeed.web.dev
 
 ![PageSpeed Insights mobile report: 99 Performance, 100 Accessibility, 100 Best Practices, 100 SEO](screenshots/travel-log-lighthouse-mobile.png)
 
+[🔗 View the full PageSpeed Insights report](https://pagespeed.web.dev/analysis/https-travel-log-project-psi-vercel-app/136tvkikhe?form_factor=mobile)
+
 ### What the audit found
 
 - The Largest Contentful Paint element was the hero heading, with a **2,500 ms element render delay** even though time to first byte was 0 ms, so the server and database were not the problem.
